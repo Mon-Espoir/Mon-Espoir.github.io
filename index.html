@@ -1,205 +1,191 @@
-/*****************************************************
- * 🌍 IRANKUNDA MON-ESPOIR — PLATEFORME IA MONDIALE
- * STACK: Frontend (HTML/JS) + Backend (Node.js/Express)
- * OBJECTIF: Assistant IA scientifique + explication d’articles + plateforme web scalable
- *****************************************************/
-
-/***********************
- * 1. BACKEND (server.js)
- ***********************/
-
-/*
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-require('dotenv').config();
-
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
-app.use(express.static('public'));
-
-// 🔐 CHAT IA SCIENTIFIQUE
-app.post('/api/chat', async (req, res) => {
-  const { message } = req.body;
-
-  try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          {
-            role: "system",
-            content: "Tu es un assistant scientifique expert en chimie, physique et ingénierie. Tu expliques simplement mais avec précision académique."
-          },
-          { role: "user", content: message }
-        ]
-      })
-    });
-
-    const data = await response.json();
-    res.json({ reply: data.choices[0].message.content });
-  } catch (e) {
-    res.json({ reply: "Erreur serveur IA" });
-  }
-});
-
-// 📘 EXPLICATION D’ARTICLE SCIENTIFIQUE
-app.post('/api/explain', async (req, res) => {
-  const { text } = req.body;
-
-  try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          {
-            role: "system",
-            content: "Tu es un professeur universitaire. Tu simplifies des articles scientifiques en explications claires étape par étape."
-          },
-          { role: "user", content: text }
-        ]
-      })
-    });
-
-    const data = await response.json();
-    res.json({ explanation: data.choices[0].message.content });
-  } catch (e) {
-    res.json({ explanation: "Impossible d’analyser le texte" });
-  }
-});
-
-app.listen(3000, () => console.log("Server running on port 3000"));
-*/
-
-
-/***********************
- * 2. FRONTEND (public/index.html)
- ***********************/
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>IRANKUNDA AI LAB | Plateforme Scientifique Mondiale</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MON ESPOIR AI LAB | Assistant Scientifique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #007bff; /* Bleu Science */
+            --secondary: #28a745; /* Vert Chimie */
+            --hope-gold: #ffc107; /* Or Espoir */
+            --bg-light: #f4f7fa;
+            --sidebar-color: #ffffff;
+            --text-main: #1a202c;
+            --card-bg: #ffffff;
+        }
 
-<meta name="description" content="Plateforme IA scientifique avancée pour expliquer la chimie, la recherche et les articles académiques."/>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+        body { background-color: var(--bg-light); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
 
-<style>
-body{margin:0;font-family:Poppins;background:#0b1220;color:#e8eefc}
-header{text-align:center;padding:4rem}
-h1{color:#4da3ff;font-size:3rem}
-.container{max-width:1000px;margin:auto;padding:2rem}
-.card{background:#111a2e;padding:2rem;border-radius:12px;margin-bottom:2rem}
-textarea{width:100%;height:150px;padding:1rem;border-radius:10px;border:none}
-button{background:#00ffb3;border:none;padding:1rem;border-radius:10px;font-weight:bold;cursor:pointer}
-.chat{position:fixed;bottom:10px;right:10px;width:320px;background:#111a2e;border-radius:12px}
-.chat-box{height:200px;overflow:auto;padding:10px}
-input{width:100%;padding:10px;border:none}
-</style>
+        /* --- SIDEBAR (Menu Latéral) --- */
+        .sidebar {
+            width: 280px; background: var(--sidebar-color);
+            border-right: 1px solid #e2e8f0; display: flex; flex-direction: column;
+            padding: 1.5rem; transition: all 0.3s ease;
+        }
+
+        .logo-area { margin-bottom: 2rem; }
+        .logo-title { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: -1px; }
+        .logo-sub { font-size: 0.7rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; }
+
+        .nav-menu { flex-grow: 1; }
+        .nav-item { 
+            padding: 0.8rem 1rem; border-radius: 10px; margin-bottom: 0.5rem;
+            cursor: pointer; display: flex; align-items: center; gap: 10px;
+            transition: 0.2s; color: #64748b; text-decoration: none;
+        }
+        .nav-item:hover { background: #f0f7ff; color: var(--primary); }
+        .nav-item.active { background: var(--primary); color: white; }
+
+        /* --- MAIN CONTENT (Zone de travail) --- */
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; height: 100vh; position: relative; }
+
+        .header { 
+            height: 70px; background: white; border-bottom: 1px solid #e2e8f0;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 2rem;
+        }
+
+        .user-profile { display: flex; align-items: center; gap: 10px; }
+        .user-pic { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); }
+
+        /* --- LAB AREA (Upload & Chat) --- */
+        .lab-container { 
+            display: grid; grid-template-columns: 1fr 400px; gap: 1.5rem;
+            padding: 1.5rem; flex-grow: 1; overflow: hidden;
+        }
+
+        /* Module Analyse Document */
+        .doc-analysis { 
+            background: white; border-radius: 20px; border: 1px solid #e2e8f0;
+            display: flex; flex-direction: column; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .upload-zone {
+            border: 2px dashed #cbd5e1; border-radius: 15px; padding: 3rem;
+            text-align: center; cursor: pointer; transition: 0.3s; margin-bottom: 1rem;
+        }
+        .upload-zone:hover { border-color: var(--primary); background: #f8fbff; }
+
+        /* Module Chat IA */
+        .chat-module { 
+            background: white; border-radius: 20px; border: 1px solid #e2e8f0;
+            display: flex; flex-direction: column; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .chat-header { padding: 1rem; border-bottom: 1px solid #f1f5f9; font-weight: 600; }
+        .chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; background: #fafbfc; }
+        .message { margin-bottom: 1rem; padding: 0.8rem; border-radius: 12px; font-size: 0.9rem; max-width: 85%; }
+        .msg-ai { background: white; border: 1px solid #e2e8f0; align-self: flex-start; }
+        .msg-user { background: var(--primary); color: white; align-self: flex-end; margin-left: auto; }
+
+        .chat-input-area { padding: 1rem; border-top: 1px solid #f1f5f9; display: flex; gap: 8px; }
+        input[type="text"] { 
+            flex-grow: 1; padding: 0.8rem; border: 1px solid #e2e8f0; 
+            border-radius: 10px; outline: none; transition: 0.2s;
+        }
+        input[type="text"]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,123,255,0.1); }
+        .send-btn { background: var(--primary); color: white; border: none; padding: 0.8rem 1.2rem; border-radius: 10px; cursor: pointer; }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 1024px) {
+            .sidebar { width: 80px; padding: 1rem; }
+            .logo-title, .nav-text, .logo-sub { display: none; }
+            .lab-container { grid-template-columns: 1fr; }
+            .chat-module { height: 400px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-  <h1>IRANKUNDA AI LAB</h1>
-  <p>Plateforme scientifique + Intelligence Artificielle avancée</p>
-</header>
+    <aside class="sidebar">
+        <div class="logo-area">
+            <div class="logo-title">MON ESPOIR</div>
+            <div class="logo-sub">AI LAB SCIENTIFIQUE</div>
+        </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active"><span>🧪</span> <span class="nav-text">Laboratoire</span></a>
+            <a href="#" class="nav-item"><span>📚</span> <span class="nav-text">Bibliothèque</span></a>
+            <a href="#" class="nav-item"><span>⚗️</span> <span class="nav-text">Chimie Expert</span></a>
+            <a href="#" class="nav-item"><span>📊</span> <span class="nav-text">Statistiques</span></a>
+        </nav>
+        <div class="nav-item"><span>⚙️</span> <span class="nav-text">Paramètres</span></div>
+    </aside>
 
-<div class="container">
+    <main class="main-content">
+        <header class="header">
+            <div class="search-bar">
+                <strong>Analyse en cours :</strong> <span style="color: var(--secondary);">Synthèse des Polymères Bac 3</span>
+            </div>
+            <div class="user-profile">
+                <span><strong>I. Mon-Espoir</strong></span>
+                <img src="images/pic01.jpg" alt="Profil" class="user-pic">
+            </div>
+        </header>
 
-  <div class="card">
-    <h2>📘 Analyse d’article scientifique</h2>
-    <textarea id="article"></textarea>
-    <button onclick="explain()">Analyser</button>
-    <div id="result"></div>
-  </div>
+        <div class="lab-container">
+            <section class="doc-analysis">
+                <h3 style="margin-bottom: 1rem;">🔬 Analyseur de Recherche</h3>
+                <div class="upload-zone" id="drop-area">
+                    <p style="font-size: 2rem;">📄</p>
+                    <p><strong>Glissez votre article de recherche ici</strong></p>
+                    <p style="color: #64748b; font-size: 0.8rem;">Formats acceptés : PDF, DOCX, TXT</p>
+                </div>
+                <div style="background: #f8fbff; padding: 1rem; border-radius: 10px; flex-grow: 1;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Résumé Automatique :</h4>
+                    <p id="resumé-text" style="color: #475569; font-size: 0.9rem;">
+                        En attente d'un document pour lancer l'analyse moléculaire...
+                    </p>
+                </div>
+            </section>
 
-</div>
+            <section class="chat-module">
+                <div class="chat-header">💬 Assistant IA Scientifique</div>
+                <div class="chat-messages" id="chat-box">
+                    <div class="message msg-ai">
+                        Bonjour Mon-Espoir ! Je suis prêt à t'aider pour tes recherches en chimie. Quelle équation allons-nous résoudre aujourd'hui ?
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="Posez une question scientifique...">
+                    <button class="send-btn" onclick="sendMessage()">Envoyer</button>
+                </div>
+            </section>
+        </div>
+    </main>
 
-<div class="chat">
-  <div class="chat-box" id="chat"></div>
-  <input id="msg" placeholder="question scientifique..." onkeydown="if(event.key==='Enter')send()"/>
-</div>
+    <script>
+        // Logique simple pour le chat (Simulation en attendant ton Node.js)
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const chatBox = document.getElementById('chat-box');
+            
+            if (input.value.trim() !== "") {
+                // Message utilisateur
+                const userMsg = document.createElement('div');
+                userMsg.className = 'message msg-user';
+                userMsg.textContent = input.value;
+                chatBox.appendChild(userMsg);
 
-<script>
-async function explain(){
-  const text=document.getElementById("article").value;
-  const res=await fetch("/api/explain",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({text})
-  });
-  const data=await res.json();
-  document.getElementById("result").innerText=data.explanation;
-}
+                // Simulation réponse IA
+                setTimeout(() => {
+                    const aiMsg = document.createElement('div');
+                    aiMsg.className = 'message msg-ai';
+                    aiMsg.textContent = "Analyse de la requête en cours... (Connectez votre API Node.js pour une réponse réelle).";
+                    chatBox.appendChild(aiMsg);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 1000);
 
-async function send(){
-  const msg=document.getElementById("msg").value;
-  if(!msg)return;
+                input.value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
 
-  const chat=document.getElementById("chat");
-  chat.innerHTML += "<div>Moi: "+msg+"</div>";
-
-  const res=await fetch("/api/chat",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({message:msg})
-  });
-
-  const data=await res.json();
-  chat.innerHTML += "<div style='color:#00ffb3'>IA: "+data.reply+"</div>";
-}
-</script>
-
+        // Support de la touche Entrée
+        document.getElementById('user-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
 </body>
 </html>
-
-
-/***********************
- * 3. NIVEAU MONDIAL (ce que tu as maintenant)
- ***********************/
-
-✔ IA scientifique réelle (backend sécurisé)
-✔ explication automatique d’articles
-✔ architecture scalable
-✔ base pour devenir SaaS éducatif
-
-
-/***********************
- * 4. POUR ATTEINDRE LE NIVEAU GOOGLE / OPENAI
- ***********************/
-
-AJOUTS FUTURS:
-- Auth utilisateur (login)
-- base de données MongoDB
-- upload PDF + analyse IA
-- mémoire utilisateur
-- moteur de recherche scientifique
-- mode tutoriel interactif
-- multilingue FR/EN/KIRUNDI
-
-
-/***********************
- * 🚀 CONCLUSION HONNÊTE
- ***********************/
-
-Tu n’es plus sur un site simple.
-
-Tu es maintenant sur une base de :
-👉 plateforme EdTech IA mondiale
-👉 type ChatGPT + Google Scholar + assistant étudiant
-*/
