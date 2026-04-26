@@ -1,12 +1,400 @@
-<title>IRANKUNDA Mon-Espoir | Chimiste & IA | Université du Burundi</title>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mon-Espoir Nkurunziza | Chimiste & Tech | Université du Burundi</title>
+<meta name="description" content="Portfolio de Mon-Espoir, étudiant en Chimie des Polymères à l'Université du Burundi. Passionné par l'IA appliquée à la chimie, guitariste et futur chercheur."/>
+<meta name="keywords" content="chimie polymères, Burundi, IA chimie, université du Burundi, étudiant chercheur, Mon-Espoir"/>
+<meta property="og:title" content="Mon-Espoir | Chimiste & Technologue | Burundi"/>
+<meta property="og:description" content="Étudiant en Chimie des Polymères, intégrant l'IA dans la recherche scientifique."/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --neon:#00ffcc;--neon2:#00b8ff;--dark:#050d15;--dark2:#0a1628;
+    --card:#0d1f35;--text:#e0f7ff;--muted:#6a8aaa;--accent:#ff6b35;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--dark);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden}
+  canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.35}
 
-<h1 class="hero-name">IRANKUNDA Mon-Espoir</h1>
-<p class="hero-sub">Chercheur en Chimie des Polymères & Développeur IA</p>
-<p class="hero-uni">UNIVERSITÉ DU BURUNDI · FACULTÉ DES SCIENCES · BAC 3</p>
+  nav{position:fixed;top:0;width:100%;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(12px);background:rgba(5,13,21,.7);border-bottom:1px solid rgba(0,255,204,.1)}
+  .nav-logo{font-family:'Space Mono',monospace;font-size:1rem;color:var(--neon);letter-spacing:2px}
+  .nav-links{display:flex;gap:2rem}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:1px;transition:color .3s}
+  .nav-links a:hover{color:var(--neon)}
 
-<p class="section-desc">
-  Je suis <strong>IRANKUNDA Mon-Espoir</strong>, un étudiant déterminé à l'Université du Burundi. 
-  Mon travail se concentre sur la création de nouveaux matériaux polymères en utilisant 
-  la <strong>Modélisation Moléculaire</strong> et l'<strong>Intelligence Artificielle</strong>. 
-  Mon but est de révolutionner l'industrie chimique locale par le numérique.
-</p>
+  section{position:relative;z-index:1}
+
+  #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem}
+  .hero-badge{display:inline-block;background:rgba(0,255,204,.08);border:1px solid rgba(0,255,204,.3);color:var(--neon);font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:3px;padding:.4rem 1.2rem;border-radius:999px;margin-bottom:2rem;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,204,.3)}50%{box-shadow:0 0 0 8px rgba(0,255,204,0)}}
+  .hero-name{font-size:clamp(3rem,8vw,6rem);font-weight:800;line-height:1;margin-bottom:1rem;background:linear-gradient(135deg,#fff 0%,var(--neon) 50%,var(--neon2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hero-sub{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--muted);margin-bottom:.5rem;font-weight:400}
+  .hero-uni{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--neon);letter-spacing:2px;margin-bottom:3rem}
+  .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn-primary{background:var(--neon);color:var(--dark);font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;padding:.8rem 2rem;border-radius:4px;text-decoration:none;letter-spacing:1px;transition:transform .2s,box-shadow .2s}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,255,204,.4)}
+  .btn-secondary{border:1px solid rgba(0,255,204,.4);color:var(--neon);font-family:'Space Mono',monospace;font-size:.8rem;padding:.8rem 2rem;border-radius:4px;text-decoration:none;letter-spacing:1px;transition:all .2s}
+  .btn-secondary:hover{background:rgba(0,255,204,.08);border-color:var(--neon)}
+  .scroll-hint{margin-top:4rem;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:2px;animation:bounce 2s infinite}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+  .section-label{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--neon);letter-spacing:3px;margin-bottom:1rem}
+  .section-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;margin-bottom:1rem;line-height:1.1}
+  .section-desc{color:var(--muted);font-size:1rem;max-width:580px;line-height:1.7}
+
+  #about{padding:6rem 2rem;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+  .about-visual{position:relative;display:flex;justify-content:center}
+  .hexagon-wrap{position:relative;width:260px;height:260px}
+  .hex-bg{width:100%;height:100%;background:linear-gradient(135deg,rgba(0,255,204,.15),rgba(0,184,255,.1));clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);border:1px solid rgba(0,255,204,.3)}
+  .hex-inner{position:absolute;inset:20px;background:var(--card);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:1rem}
+  .hex-icon{font-size:3rem;margin-bottom:.5rem}
+  .hex-label{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--neon);letter-spacing:2px}
+  .orbit-dot{position:absolute;width:10px;height:10px;background:var(--neon);border-radius:50%;animation:orbit 4s linear infinite}
+  @keyframes orbit{0%{transform:rotate(0deg) translateX(140px)}100%{transform:rotate(360deg) translateX(140px)}}
+  .orbit-dot:nth-child(2){animation-delay:-2s;background:var(--neon2);width:6px;height:6px}
+  .stat-chips{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem}
+  .chip{background:rgba(0,255,204,.08);border:1px solid rgba(0,255,204,.2);color:var(--neon);font-family:'Space Mono',monospace;font-size:.7rem;padding:.3rem .8rem;border-radius:4px;letter-spacing:1px}
+
+  #skills{padding:6rem 2rem;background:linear-gradient(180deg,transparent,rgba(0,255,204,.03),transparent)}
+  .skills-inner{max-width:1100px;margin:0 auto}
+  .skills-header{text-align:center;margin-bottom:4rem}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+  .skill-card{background:var(--card);border:1px solid rgba(0,255,204,.1);border-radius:8px;padding:1.5rem;transition:border-color .3s,transform .2s;cursor:default}
+  .skill-card:hover{border-color:rgba(0,255,204,.4);transform:translateY(-4px)}
+  .skill-card-icon{font-size:2rem;margin-bottom:1rem}
+  .skill-card-title{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+  .skill-card-desc{color:var(--muted);font-size:.85rem;line-height:1.6;margin-bottom:1.2rem}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+  .tag{background:rgba(0,184,255,.1);border:1px solid rgba(0,184,255,.2);color:var(--neon2);font-family:'Space Mono',monospace;font-size:.65rem;padding:.2rem .6rem;border-radius:4px}
+
+  #projects{padding:6rem 2rem;max-width:1100px;margin:0 auto}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin-top:3rem}
+  .proj-card{background:var(--card);border:1px solid rgba(0,255,204,.1);border-radius:8px;overflow:hidden;transition:all .3s}
+  .proj-card:hover{border-color:rgba(0,255,204,.4);transform:translateY(-4px)}
+  .proj-top{height:4px;background:linear-gradient(90deg,var(--neon),var(--neon2))}
+  .proj-body{padding:1.5rem}
+  .proj-tag{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--accent);letter-spacing:2px;margin-bottom:.8rem}
+  .proj-title{font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+  .proj-desc{color:var(--muted);font-size:.85rem;line-height:1.6;margin-bottom:1.2rem}
+  .proj-footer{display:flex;justify-content:space-between;align-items:center}
+  .proj-link{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--neon);text-decoration:none;letter-spacing:1px;transition:opacity .2s}
+  .proj-link:hover{opacity:.7}
+
+  #ai-chat{padding:6rem 2rem;background:linear-gradient(180deg,transparent,rgba(0,184,255,.03),transparent)}
+  .ai-inner{max-width:700px;margin:0 auto}
+  .ai-header{text-align:center;margin-bottom:3rem}
+  .chat-box{background:var(--card);border:1px solid rgba(0,255,204,.2);border-radius:8px;overflow:hidden}
+  .chat-messages{padding:1.5rem;min-height:200px;max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:1rem}
+  .msg{display:flex;gap:.8rem;align-items:flex-start}
+  .msg-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;font-family:'Space Mono',monospace;font-weight:700}
+  .msg-ai .msg-avatar{background:rgba(0,255,204,.15);border:1px solid rgba(0,255,204,.3);color:var(--neon)}
+  .msg-user .msg-avatar{background:rgba(0,184,255,.15);border:1px solid rgba(0,184,255,.3);color:var(--neon2)}
+  .msg-text{background:rgba(255,255,255,.04);border-radius:6px;padding:.7rem 1rem;font-size:.85rem;line-height:1.6;color:var(--text);flex:1}
+  .msg-user{flex-direction:row-reverse}
+  .msg-user .msg-text{text-align:right}
+  .chat-input{display:flex;border-top:1px solid rgba(0,255,204,.1)}
+  .chat-input input{flex:1;background:transparent;border:none;padding:1rem 1.2rem;color:var(--text);font-family:'Syne',sans-serif;font-size:.9rem;outline:none}
+  .chat-input input::placeholder{color:var(--muted)}
+  .chat-send{background:var(--neon);border:none;color:var(--dark);padding:.8rem 1.5rem;font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;cursor:pointer;transition:opacity .2s;letter-spacing:1px}
+  .chat-send:hover{opacity:.85}
+  .chat-send:disabled{opacity:.4;cursor:not-allowed}
+  .typing{display:flex;gap:4px;align-items:center;padding:.5rem 0}
+  .dot{width:6px;height:6px;background:var(--neon);border-radius:50%;animation:typing .8s infinite}
+  .dot:nth-child(2){animation-delay:.15s}
+  .dot:nth-child(3){animation-delay:.3s}
+  @keyframes typing{0%,80%,100%{transform:scale(1);opacity:.5}40%{transform:scale(1.3);opacity:1}}
+
+  #contact{padding:6rem 2rem;max-width:800px;margin:0 auto;text-align:center}
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:3rem 0}
+  .contact-card{background:var(--card);border:1px solid rgba(0,255,204,.1);border-radius:8px;padding:1.5rem;transition:all .3s;text-decoration:none;color:var(--text)}
+  .contact-card:hover{border-color:var(--neon);transform:translateY(-4px)}
+  .contact-card-icon{font-size:1.8rem;margin-bottom:.8rem}
+  .contact-card-label{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--neon);letter-spacing:2px;margin-bottom:.3rem}
+  .contact-card-val{font-size:.85rem;color:var(--muted)}
+
+  footer{border-top:1px solid rgba(0,255,204,.1);padding:2rem;text-align:center;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:2px}
+
+  @media(max-width:768px){
+    #about{grid-template-columns:1fr}
+    .hexagon-wrap{width:200px;height:200px}
+    nav{padding:.8rem 1rem}
+    .nav-links{gap:1rem}
+    .nav-links a{font-size:.75rem}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<nav>
+  <div class="nav-logo">ME://PORTFOLIO</div>
+  <div class="nav-links">
+    <a href="#about">À propos</a>
+    <a href="#skills">Compétences</a>
+    <a href="#projects">Projets</a>
+    <a href="#ai-chat">IA Assistant</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div>
+    <div class="hero-badge">🇧🇮 BUJUMBURA, BURUNDI</div>
+    <h1 class="hero-name">MON-ESPOIR</h1>
+    <p class="hero-sub">Étudiant Chercheur en Chimie des Polymères</p>
+    <p class="hero-uni">UNIVERSITÉ DU BURUNDI · BAC 3 · IA + SCIENCE</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">Voir mes projets →</a>
+      <a href="#ai-chat" class="btn-secondary">Parler à mon IA</a>
+    </div>
+    <p class="scroll-hint">↓ SCROLL ↓</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-visual">
+    <div class="hexagon-wrap">
+      <div class="hex-bg"></div>
+      <div class="hex-inner">
+        <div class="hex-icon">⚗️</div>
+        <div class="hex-label">CHIMISTE</div>
+      </div>
+      <div class="orbit-dot"></div>
+      <div class="orbit-dot" style="animation-delay:-2s;background:#00b8ff;width:6px;height:6px;animation-duration:6s"></div>
+    </div>
+  </div>
+  <div>
+    <div class="section-label">// À PROPOS</div>
+    <h2 class="section-title">Science,<br/>Code & Créativité</h2>
+    <p class="section-desc">Passionné par la chimie des polymères et l'intelligence artificielle, je crois que la science de demain se construit à l'intersection de la chimie moléculaire et des technologies numériques. Guitariste dans l'âme, je cultive la rigueur et la créativité.</p>
+    <div class="stat-chips">
+      <span class="chip">BAC 3 UB</span>
+      <span class="chip">POLYMÈRES</span>
+      <span class="chip">IA APPLIQUÉE</span>
+      <span class="chip">GUITARISTE</span>
+      <span class="chip">BURUNDI 🇧🇮</span>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="skills-inner">
+    <div class="skills-header">
+      <div class="section-label">// COMPÉTENCES</div>
+      <h2 class="section-title">Mes Domaines d'Excellence</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon">🧪</div>
+        <div class="skill-card-title">Chimie des Polymères</div>
+        <div class="skill-card-desc">Synthèse, caractérisation et analyse de matériaux polymères. Études des propriétés mécaniques et thermiques.</div>
+        <div class="skill-tags"><span class="tag">GPC</span><span class="tag">DSC</span><span class="tag">FTIR</span><span class="tag">Rhéologie</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🤖</div>
+        <div class="skill-card-title">IA & Data Science</div>
+        <div class="skill-card-desc">Application du machine learning à la recherche chimique : prédiction de propriétés, analyse de données expérimentales.</div>
+        <div class="skill-tags"><span class="tag">Python</span><span class="tag">ML</span><span class="tag">NumPy</span><span class="tag">Pandas</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">💻</div>
+        <div class="skill-card-title">Développement Web</div>
+        <div class="skill-card-desc">Création de sites web modernes et d'outils numériques pour visualiser et partager la recherche scientifique.</div>
+        <div class="skill-tags"><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">GitHub</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🎸</div>
+        <div class="skill-card-title">Arts & Expression</div>
+        <div class="skill-card-desc">La guitare comme outil de créativité et d'équilibre. La musique et la science partagent la même rigueur harmonique.</div>
+        <div class="skill-tags"><span class="tag">Guitare</span><span class="tag">Composition</span><span class="tag">Créativité</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">// PROJETS</div>
+  <h2 class="section-title">Travaux & Recherches</h2>
+  <div class="projects-grid">
+    <div class="proj-card">
+      <div class="proj-top"></div>
+      <div class="proj-body">
+        <div class="proj-tag">RECHERCHE · CHIMIE</div>
+        <div class="proj-title">Étude des Polymères Biodégradables</div>
+        <div class="proj-desc">Analyse des propriétés physicochimiques de biopolymères locaux issus de ressources burundaises. Potentiel d'application dans l'emballage durable.</div>
+        <div class="proj-footer">
+          <a href="https://github.com" class="proj-link">→ GitHub</a>
+          <span class="tag">En cours</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-top" style="background:linear-gradient(90deg,#00b8ff,#7c3aed)"></div>
+      <div class="proj-body">
+        <div class="proj-tag">IA · DATA SCIENCE</div>
+        <div class="proj-title">ML pour la Prédiction Moléculaire</div>
+        <div class="proj-desc">Modèle de machine learning pour prédire les propriétés des polymères à partir de leur structure chimique. Réduction du temps d'expérimentation.</div>
+        <div class="proj-footer">
+          <a href="https://github.com" class="proj-link">→ GitHub</a>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-top" style="background:linear-gradient(90deg,#ff6b35,#f7c59f)"></div>
+      <div class="proj-body">
+        <div class="proj-tag">PORTFOLIO · WEB</div>
+        <div class="proj-title">Ce Portfolio GitHub Pages</div>
+        <div class="proj-desc">Site personnel hébergé sur GitHub Pages, conçu pour partager mes recherches, compétences et projets avec la communauté mondiale.</div>
+        <div class="proj-footer">
+          <a href="https://github.com" class="proj-link">→ Code source</a>
+          <span class="tag">HTML/JS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ai-chat">
+  <div class="ai-inner">
+    <div class="ai-header">
+      <div class="section-label">// IA INTÉGRÉE</div>
+      <h2 class="section-title">Mon Assistant IA</h2>
+      <p class="section-desc" style="margin:0 auto">Posez vos questions sur la chimie, mes projets ou le Burundi. Propulsé par Claude AI.</p>
+    </div>
+    <div class="chat-box">
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg msg-ai">
+          <div class="msg-avatar">ME</div>
+          <div class="msg-text">Bonjour ! Je suis l'assistant IA de Mon-Espoir. Posez-moi vos questions sur la chimie des polymères, l'IA appliquée aux sciences, ou le parcours de Mon-Espoir à l'Université du Burundi ! 🧪</div>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Posez votre question..." />
+        <button class="chat-send" id="chatBtn" onclick="sendMsg()">ENVOYER</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">// CONTACT</div>
+  <h2 class="section-title">Travaillons Ensemble</h2>
+  <p class="section-desc" style="margin:0 auto">Collaborations scientifiques, échanges académiques, ou simplement discuter de chimie et de musique.</p>
+  <div class="contact-grid">
+    <a href="https://github.com" class="contact-card">
+      <div class="contact-card-icon">🐙</div>
+      <div class="contact-card-label">GITHUB</div>
+      <div class="contact-card-val">github.com/mon-espoir</div>
+    </a>
+    <a href="https://linkedin.com" class="contact-card">
+      <div class="contact-card-icon">💼</div>
+      <div class="contact-card-label">LINKEDIN</div>
+      <div class="contact-card-val">linkedin.com/in/mon-espoir</div>
+    </a>
+    <a href="mailto:monespoir@ub.edu.bi" class="contact-card">
+      <div class="contact-card-icon">📧</div>
+      <div class="contact-card-label">EMAIL</div>
+      <div class="contact-card-val">monespoir@ub.edu.bi</div>
+    </a>
+    <a href="https://twitter.com" class="contact-card">
+      <div class="contact-card-icon">🌍</div>
+      <div class="contact-card-label">LOCALISATION</div>
+      <div class="contact-card-val">Bujumbura, Burundi 🇧🇮</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 MON-ESPOIR · UNIVERSITÉ DU BURUNDI · CHIMIE DES POLYMÈRES · ALL RIGHTS RESERVED</p>
+</footer>
+
+<script>
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+resize();
+window.addEventListener('resize',resize);
+class Particle{
+  constructor(){this.reset()}
+  reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=Math.random()*1.5+.5;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.a=Math.random()}
+  update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}
+  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(0,255,204,${this.a*.6})`;ctx.fill()}
+}
+for(let i=0;i<120;i++)particles.push(new Particle());
+function animate(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{p.update();p.draw()});
+  particles.forEach((a,i)=>{
+    particles.slice(i+1).forEach(b=>{
+      const d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<100){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(0,255,204,${.15*(1-d/100)})`;ctx.lineWidth=.5;ctx.stroke()}
+    })
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+const SYSTEM = `Tu es l'assistant IA personnel de Mon-Espoir, étudiant en Bac 3 Chimie des Polymères à l'Université du Burundi à Bujumbura. Tu parles en son nom et représentes son portfolio. Tu es passionné, intelligent et technologique. Tu répondras en français par défaut. Infos clés : spécialité = chimie des polymères, intérêts = IA appliquée à la chimie, guitare, technologie. Université du Burundi. Réponds de façon concise (3-4 phrases max) et enthousiaste.`;
+
+let history = [];
+
+async function sendMsg(){
+  const inp = document.getElementById('chatInput');
+  const btn = document.getElementById('chatBtn');
+  const msgs = document.getElementById('chatMessages');
+  const txt = inp.value.trim();
+  if(!txt) return;
+  inp.value = '';
+  btn.disabled = true;
+
+  msgs.innerHTML += `<div class="msg msg-user"><div class="msg-avatar">Vous</div><div class="msg-text">${txt}</div></div>`;
+  const typing = document.createElement('div');
+  typing.className = 'msg msg-ai';
+  typing.innerHTML = `<div class="msg-avatar">ME</div><div class="msg-text"><div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>`;
+  msgs.appendChild(typing);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  history.push({role:'user',content:txt});
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:300,
+        system:SYSTEM,
+        messages:history
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || "Désolé, je n'ai pas pu répondre.";
+    history.push({role:'assistant',content:reply});
+    typing.querySelector('.msg-text').textContent = reply;
+  } catch(e) {
+    typing.querySelector('.msg-text').textContent = "Connexion IA indisponible. Contactez Mon-Espoir directement !";
+  }
+  btn.disabled = false;
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg()});
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})});
+});
+
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});
+},{threshold:.1});
+document.querySelectorAll('section').forEach(s=>{s.style.opacity='.95';obs.observe(s)});
+</script>
+</body>
+</html>
