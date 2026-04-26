@@ -4169,3 +4169,37 @@ img {
     object-fit: cover;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
+/* --- ADAPTATION MOBILE (RESPONSIVE) --- */
+
+@media (max-width: 768px) {
+    /* Aligne le texte au centre sur téléphone */
+    #hero, #about, #skills, #projects, #contact {
+        padding: 4rem 1.5rem !important;
+        text-align: center !important;
+    }
+
+    /* Remet les colonnes l'une sous l'autre */
+    .about-visual, .skills-grid, .projects-grid, .contact-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* Ajuste la taille du nom pour qu'il ne dépasse pas */
+    .hero-name {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Assure que les photos ne sont pas trop larges */
+    .hexagon-wrap {
+        width: 180px !important;
+        height: 180px !important;
+        margin: 0 auto 2rem !important;
+    }
+
+    .section-desc {
+        margin: 0 auto !important;
+        font-size: 0.95rem !important;
+    }
+}
