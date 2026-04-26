@@ -3,30 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MON ESPOIR AI LAB | Assistant Scientifique</title>
+    <title>MON ESPOIR AI LAB | Chimie & Science</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #007bff; /* Bleu Science */
-            --secondary: #28a745; /* Vert Chimie */
-            --hope-gold: #ffc107; /* Or Espoir */
+            --primary: #007bff;
+            --secondary: #28a745;
+            --hope-gold: #ffc107;
             --bg-light: #f4f7fa;
             --sidebar-color: #ffffff;
             --text-main: #1a202c;
-            --card-bg: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-
         body { background-color: var(--bg-light); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
 
-        /* --- SIDEBAR (Menu Latéral) --- */
+        /* SIDEBAR */
         .sidebar {
             width: 280px; background: var(--sidebar-color);
             border-right: 1px solid #e2e8f0; display: flex; flex-direction: column;
             padding: 1.5rem; transition: all 0.3s ease;
         }
-
         .logo-area { margin-bottom: 2rem; }
         .logo-title { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: -1px; }
         .logo-sub { font-size: 0.7rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; }
@@ -40,24 +37,20 @@
         .nav-item:hover { background: #f0f7ff; color: var(--primary); }
         .nav-item.active { background: var(--primary); color: white; }
 
-        /* --- MAIN CONTENT (Zone de travail) --- */
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; height: 100vh; position: relative; }
-
+        /* MAIN CONTENT */
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; height: 100vh; }
         .header { 
             height: 70px; background: white; border-bottom: 1px solid #e2e8f0;
             display: flex; align-items: center; justify-content: space-between; padding: 0 2rem;
         }
-
-        .user-profile { display: flex; align-items: center; gap: 10px; }
         .user-pic { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); }
 
-        /* --- LAB AREA (Upload & Chat) --- */
+        /* ZONE DE TRAVAIL */
         .lab-container { 
             display: grid; grid-template-columns: 1fr 400px; gap: 1.5rem;
             padding: 1.5rem; flex-grow: 1; overflow: hidden;
         }
 
-        /* Module Analyse Document */
         .doc-analysis { 
             background: white; border-radius: 20px; border: 1px solid #e2e8f0;
             display: flex; flex-direction: column; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
@@ -69,31 +62,25 @@
         }
         .upload-zone:hover { border-color: var(--primary); background: #f8fbff; }
 
-        /* Module Chat IA */
         .chat-module { 
             background: white; border-radius: 20px; border: 1px solid #e2e8f0;
             display: flex; flex-direction: column; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
         }
         .chat-header { padding: 1rem; border-bottom: 1px solid #f1f5f9; font-weight: 600; }
-        .chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; background: #fafbfc; }
+        .chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; background: #fafbfc; display: flex; flex-direction: column; }
         .message { margin-bottom: 1rem; padding: 0.8rem; border-radius: 12px; font-size: 0.9rem; max-width: 85%; }
         .msg-ai { background: white; border: 1px solid #e2e8f0; align-self: flex-start; }
-        .msg-user { background: var(--primary); color: white; align-self: flex-end; margin-left: auto; }
+        .msg-user { background: var(--primary); color: white; align-self: flex-end; }
 
         .chat-input-area { padding: 1rem; border-top: 1px solid #f1f5f9; display: flex; gap: 8px; }
-        input[type="text"] { 
-            flex-grow: 1; padding: 0.8rem; border: 1px solid #e2e8f0; 
-            border-radius: 10px; outline: none; transition: 0.2s;
-        }
-        input[type="text"]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,123,255,0.1); }
+        input[type="text"] { flex-grow: 1; padding: 0.8rem; border: 1px solid #e2e8f0; border-radius: 10px; outline: none; }
         .send-btn { background: var(--primary); color: white; border: none; padding: 0.8rem 1.2rem; border-radius: 10px; cursor: pointer; }
 
-        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 1024px) {
             .sidebar { width: 80px; padding: 1rem; }
             .logo-title, .nav-text, .logo-sub { display: none; }
-            .lab-container { grid-template-columns: 1fr; }
-            .chat-module { height: 400px; }
+            .lab-container { grid-template-columns: 1fr; overflow-y: auto; }
+            .chat-module { height: 450px; }
         }
     </style>
 </head>
@@ -102,77 +89,65 @@
     <aside class="sidebar">
         <div class="logo-area">
             <div class="logo-title">MON ESPOIR</div>
-            <div class="logo-sub">AI LAB SCIENTIFIQUE</div>
+            <div class="logo-sub">AI LAB Y'U BUSHAKASHATSI</div>
         </div>
         <nav class="nav-menu">
             <a href="#" class="nav-item active"><span>🧪</span> <span class="nav-text">Laboratoire</span></a>
-            <a href="#" class="nav-item"><span>📚</span> <span class="nav-text">Bibliothèque</span></a>
-            <a href="#" class="nav-item"><span>⚗️</span> <span class="nav-text">Chimie Expert</span></a>
-            <a href="#" class="nav-item"><span>📊</span> <span class="nav-text">Statistiques</span></a>
+            <a href="#" class="nav-item"><span>📚</span> <span class="nav-text">Ubushakashatsi</span></a>
+            <a href="#" class="nav-item"><span>⚗️</span> <span class="nav-text">Ivyerekeye Chimie</span></a>
+            <a href="#" class="nav-item"><span>🎓</span> <span class="nav-text">Iterambere ry'ishure</span></a>
         </nav>
-        <div class="nav-item"><span>⚙️</span> <span class="nav-text">Paramètres</span></div>
     </aside>
 
     <main class="main-content">
         <header class="header">
-            <div class="search-bar">
-                <strong>Analyse en cours :</strong> <span style="color: var(--secondary);">Synthèse des Polymères Bac 3</span>
-            </div>
-            <div class="user-profile">
-                <span><strong>I. Mon-Espoir</strong></span>
-                <img src="images/pic01.jpg" alt="Profil" class="user-pic">
-            </div>
+            <div><strong>Kaze munzu ya Mon-Espoir!</strong> <span style="color: var(--secondary); margin-left: 10px;">Turafashanya gutahura ivya Chimie yose.</span></div>
+            <img src="images/pic01.jpg" alt="Profil" class="user-pic">
         </header>
 
         <div class="lab-container">
             <section class="doc-analysis">
-                <h3 style="margin-bottom: 1rem;">🔬 Analyseur de Recherche</h3>
-                <div class="upload-zone" id="drop-area">
+                <h3>🔬 Ubushakashatsi bworoshe</h3>
+                <div class="upload-zone">
                     <p style="font-size: 2rem;">📄</p>
-                    <p><strong>Glissez votre article de recherche ici</strong></p>
-                    <p style="color: #64748b; font-size: 0.8rem;">Formats acceptés : PDF, DOCX, TXT</p>
+                    <p><strong>Shira icigwa canke igitabu ngaha</strong></p>
+                    <p style="color: #64748b; font-size: 0.8rem;">PDF, DOCX (Mubike neza)</p>
                 </div>
                 <div style="background: #f8fbff; padding: 1rem; border-radius: 10px; flex-grow: 1;">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Résumé Automatique :</h4>
-                    <p id="resumé-text" style="color: #475569; font-size: 0.9rem;">
-                        En attente d'un document pour lancer l'analyse moléculaire...
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Résumé :</h4>
+                    <p id="resumé-text" style="color: #475569; font-size: 0.9rem; font-style: italic;">
+                        Turindiriye igitabu canke icigwa ca chimie kugira tugisuzume...
                     </p>
                 </div>
             </section>
 
             <section class="chat-module">
-                <div class="chat-header">💬 Assistant IA Scientifique</div>
+                <div class="chat-header">💬 Ganira na AI (Umuhanuzi)</div>
                 <div class="chat-messages" id="chat-box">
-                    <div class="message msg-ai">
-                        Bonjour Mon-Espoir ! Je suis prêt à t'aider pour tes recherches en chimie. Quelle équation allons-nous résoudre aujourd'hui ?
-                    </div>
+                    <div class="message msg-ai">Kaze munzu ya Mon-Espoir! Nditeguye kugufasha mu bibazo vyose vya Chimie canke ivyigwa vyo muri Kaminuza. Tubaze iki uyu munsi?</div>
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" id="user-input" placeholder="Posez une question scientifique...">
-                    <button class="send-btn" onclick="sendMessage()">Envoyer</button>
+                    <input type="text" id="user-input" placeholder="Andika ikibazo cawe ngaha...">
+                    <button class="send-btn" onclick="sendMessage()">Rungika</button>
                 </div>
             </section>
         </div>
     </main>
 
     <script>
-        // Logique simple pour le chat (Simulation en attendant ton Node.js)
         function sendMessage() {
             const input = document.getElementById('user-input');
             const chatBox = document.getElementById('chat-box');
-            
             if (input.value.trim() !== "") {
-                // Message utilisateur
                 const userMsg = document.createElement('div');
                 userMsg.className = 'message msg-user';
                 userMsg.textContent = input.value;
                 chatBox.appendChild(userMsg);
-
-                // Simulation réponse IA
+                
                 setTimeout(() => {
                     const aiMsg = document.createElement('div');
                     aiMsg.className = 'message msg-ai';
-                    aiMsg.textContent = "Analyse de la requête en cours... (Connectez votre API Node.js pour une réponse réelle).";
+                    aiMsg.textContent = "Ndiko ndasuzuma ikibazo cawe... (Connectez votre serveur Node.js pour la réponse réelle).";
                     chatBox.appendChild(aiMsg);
                     chatBox.scrollTop = chatBox.scrollHeight;
                 }, 1000);
@@ -181,11 +156,7 @@
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
         }
-
-        // Support de la touche Entrée
-        document.getElementById('user-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') sendMessage();
-        });
+        document.getElementById('user-input').addEventListener('keypress', function(e){ if(e.key === 'Enter') sendMessage(); });
     </script>
 </body>
 </html>
