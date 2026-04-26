@@ -43,7 +43,7 @@
             height: 70px; background: white; border-bottom: 1px solid #e2e8f0;
             display: flex; align-items: center; justify-content: space-between; padding: 0 2rem;
         }
-        .user-pic { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); }
+        .user-pic { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
 
         /* ZONE DE TRAVAIL */
         .lab-container { 
@@ -89,46 +89,46 @@
     <aside class="sidebar">
         <div class="logo-area">
             <div class="logo-title">MON ESPOIR</div>
-            <div class="logo-sub">AI LAB Y'U BUSHAKASHATSI</div>
+            <div class="logo-sub">AI LAB RECHERCHE</div>
         </div>
         <nav class="nav-menu">
             <a href="#" class="nav-item active"><span>🧪</span> <span class="nav-text">Laboratoire</span></a>
-            <a href="#" class="nav-item"><span>📚</span> <span class="nav-text">Ubushakashatsi</span></a>
-            <a href="#" class="nav-item"><span>⚗️</span> <span class="nav-text">Ivyerekeye Chimie</span></a>
-            <a href="#" class="nav-item"><span>🎓</span> <span class="nav-text">Iterambere ry'ishure</span></a>
+            <a href="#" class="nav-item"><span>📚</span> <span class="nav-text">Bibliothèque</span></a>
+            <a href="#" class="nav-item"><span>⚗️</span> <span class="nav-text">Expert Chimie</span></a>
+            <a href="#" class="nav-item"><span>🎓</span> <span class="nav-text">Réussite Académique</span></a>
         </nav>
     </aside>
 
     <main class="main-content">
         <header class="header">
-            <div><strong>Kaze munzu ya Mon-Espoir!</strong> <span style="color: var(--secondary); margin-left: 10px;">Turafashanya gutahura ivya Chimie yose.</span></div>
+            <div><strong>Kaze munzu ya Mon-Espoir !</strong> <span style="color: var(--secondary); margin-left: 10px;">Assistant intelligent pour toute la Chimie.</span></div>
             <img src="images/pic01.jpg" alt="Profil" class="user-pic">
         </header>
 
         <div class="lab-container">
             <section class="doc-analysis">
-                <h3>🔬 Ubushakashatsi bworoshe</h3>
+                <h3>🔬 Analyseur de Documents</h3>
                 <div class="upload-zone">
                     <p style="font-size: 2rem;">📄</p>
-                    <p><strong>Shira icigwa canke igitabu ngaha</strong></p>
-                    <p style="color: #64748b; font-size: 0.8rem;">PDF, DOCX (Mubike neza)</p>
+                    <p><strong>Déposez votre cours ou article de chimie ici</strong></p>
+                    <p style="color: #64748b; font-size: 0.8rem;">Formats acceptés : PDF, DOCX</p>
                 </div>
                 <div style="background: #f8fbff; padding: 1rem; border-radius: 10px; flex-grow: 1;">
                     <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Résumé :</h4>
                     <p id="resumé-text" style="color: #475569; font-size: 0.9rem; font-style: italic;">
-                        Turindiriye igitabu canke icigwa ca chimie kugira tugisuzume...
+                        En attente d'un document pour générer l'analyse scientifique...
                     </p>
                 </div>
             </section>
 
             <section class="chat-module">
-                <div class="chat-header">💬 Ganira na AI (Umuhanuzi)</div>
+                <div class="chat-header">💬 Assistant IA Scientifique</div>
                 <div class="chat-messages" id="chat-box">
-                    <div class="message msg-ai">Kaze munzu ya Mon-Espoir! Nditeguye kugufasha mu bibazo vyose vya Chimie canke ivyigwa vyo muri Kaminuza. Tubaze iki uyu munsi?</div>
+                    <div class="message msg-ai">Kaze munzu ya Mon-Espoir ! Je suis prêt à vous aider pour vos recherches ou exercices de chimie. Quelle est votre question ?</div>
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" id="user-input" placeholder="Andika ikibazo cawe ngaha...">
-                    <button class="send-btn" onclick="sendMessage()">Rungika</button>
+                    <input type="text" id="user-input" placeholder="Posez votre question ici...">
+                    <button class="send-btn" onclick="sendMessage()">Envoyer</button>
                 </div>
             </section>
         </div>
@@ -144,19 +144,4 @@
                 userMsg.textContent = input.value;
                 chatBox.appendChild(userMsg);
                 
-                setTimeout(() => {
-                    const aiMsg = document.createElement('div');
-                    aiMsg.className = 'message msg-ai';
-                    aiMsg.textContent = "Ndiko ndasuzuma ikibazo cawe... (Connectez votre serveur Node.js pour la réponse réelle).";
-                    chatBox.appendChild(aiMsg);
-                    chatBox.scrollTop = chatBox.scrollHeight;
-                }, 1000);
-
-                input.value = "";
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
-        }
-        document.getElementById('user-input').addEventListener('keypress', function(e){ if(e.key === 'Enter') sendMessage(); });
-    </script>
-</body>
-</html>
+                setTimeout(()
