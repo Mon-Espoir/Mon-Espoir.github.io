@@ -1,710 +1,162 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MON ESPOIR AI LAB | Plateforme Scientifique Burundi</title>
-<meta name="description" content="Plateforme EdTech IA pour les étudiants du Burundi. Chimie des polymères, analyse de documents, assistant scientifique."/>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<style>
-/* ═══════════════════════════════
-   MON ESPOIR AI LAB
-   Police: Times New Roman (grande, lisible)
-   Tailles augmentées partout
-═══════════════════════════════ */
-:root {
-  --blue:       #0057ff;
-  --blue-mid:   #3b7bff;
-  --blue-pale:  #e4edff;
-  --blue-pale2: #f0f5ff;
-  --yellow:     #f59e0b;
-  --yellow-pale:#fef3c7;
-  --yellow-dark:#92400e;
-  --green:      #059669;
-  --red:        #dc2626;
-  --bg:         #f4f7ff;
-  --white:      #ffffff;
-  --border:     #d8e2f8;
-  --dark:       #0a0e2a;
-  --mid:        #374169;
-  --muted:      #6b7aad;
-  --light-text: #94a3b8;
-  --sh-sm: 0 2px 8px rgba(0,87,255,.08),0 1px 3px rgba(0,87,255,.05);
-  --sh-md: 0 6px 28px rgba(0,87,255,.12);
-  --sidebar-w: 270px;
-  --topbar-h:  68px;
-  --r: 14px;
-  /* POLICE TIMES NEW ROMAN PARTOUT */
-  --font: 'Times New Roman', Times, Georgia, serif;
-  --font-display: 'IM Fell English', 'Times New Roman', serif;
-  --font-mono: 'DM Mono', 'Courier New', monospace;
-}
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { height:100%; font-size:18px; } /* BASE 18px = tout plus grand */
-body {
-  font-family: var(--font);
-  font-size: 1rem; /* 18px */
-  line-height: 1.7;
-  background: var(--bg);
-  color: var(--dark);
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-button, input, textarea, select { font-family: var(--font); font-size: 1rem; }
-a { text-decoration: none; color: inherit; }
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #b8caf8; border-radius: 4px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MON ESPOIR AI LAB | Chimie & Science</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #007bff;
+            --secondary: #28a745;
+            --hope-gold: #ffc107;
+            --bg-light: #f4f7fa;
+            --sidebar-color: #ffffff;
+            --text-main: #1a202c;
+        }
 
-/* ── TOPBAR ── */
-.topbar {
-  height: var(--topbar-h);
-  background: var(--white);
-  border-bottom: 2px solid var(--border);
-  display: flex; align-items: center;
-  padding: 0 1.5rem; gap: 1rem;
-  flex-shrink: 0; z-index: 60;
-}
-.brand-main {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.5rem; /* grand */
-  color: var(--blue);
-}
-.brand-ai {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: var(--yellow);
-  margin: 0 .15rem;
-}
-.brand-lab {
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.topbar-divider { width:1px; height:32px; background:var(--border); margin:0 .2rem; }
-.topbar-flag { font-size:.9rem; color:var(--muted); font-style:italic; white-space:nowrap; }
-.topbar-spacer { flex:1; }
-.topbar-status {
-  display:flex; align-items:center; gap:.45rem;
-  background:#ecfdf5; border:1px solid #a7f3d0;
-  color:var(--green); font-size:.8rem; font-weight:700;
-  padding:.35rem 1rem; border-radius:999px; white-space:nowrap;
-}
-.status-dot {
-  width:8px; height:8px; background:var(--green);
-  border-radius:50%; animation:pgreen 1.8s infinite;
-}
-@keyframes pgreen{0%,100%{box-shadow:0 0 0 0 rgba(5,150,105,.4)}50%{box-shadow:0 0 0 7px rgba(5,150,105,0)}}
-.topbar-avatar {
-  width:40px; height:40px; border-radius:11px;
-  overflow:hidden; border:2px solid var(--blue-pale);
-  background:linear-gradient(135deg,var(--blue),#0d9488);
-  display:flex; align-items:center; justify-content:center;
-  color:white; font-size:.85rem; font-weight:700; cursor:pointer; flex-shrink:0;
-}
-.topbar-avatar img { width:100%; height:100%; object-fit:cover; object-position:center top; }
-.menu-btn {
-  display:none; background:none; border:none; cursor:pointer;
-  color:var(--mid); padding:.4rem; border-radius:7px;
-}
-.menu-btn:hover { background:var(--blue-pale); }
-.menu-btn svg { width:22px; height:22px; display:block; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
 
-/* ── LAYOUT ── */
-.app-body { display:flex; flex:1; overflow:hidden; min-height:0; }
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px; background: var(--sidebar-color);
+            border-right: 1px solid #e2e8f0; display: flex; flex-direction: column;
+            padding: 1.5rem; transition: all 0.3s ease;
+        }
+        .logo-area { margin-bottom: 2rem; }
+        .logo-title { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: -1px; }
+        .logo-sub { font-size: 0.7rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; }
 
-/* ── SIDEBAR ── */
-.sidebar {
-  width:var(--sidebar-w);
-  background:var(--white); border-right:1px solid var(--border);
-  display:flex; flex-direction:column; flex-shrink:0;
-  overflow-y:auto; transition:transform .3s cubic-bezier(.4,0,.2,1);
-}
-.sidebar-section {
-  padding:1.3rem 1.1rem .45rem;
-  font-size:.7rem; font-weight:700;
-  letter-spacing:2.5px; text-transform:uppercase;
-  color:var(--light-text);
-}
-.nav-item {
-  display:flex; align-items:center; gap:.85rem;
-  padding:.7rem 1.1rem; margin:.06rem .65rem;
-  border-radius:10px; cursor:pointer;
-  color:var(--mid); font-size:.95rem; /* plus grand */
-  transition:all .18s; border:none; background:none;
-  width:calc(100% - 1.3rem); text-align:left; position:relative;
-}
-.nav-item:hover { background:var(--blue-pale2); color:var(--blue); }
-.nav-item.active { background:var(--blue-pale); color:var(--blue); font-weight:700; }
-.nav-item.active::before {
-  content:''; position:absolute; left:-2px; top:22%; bottom:22%;
-  width:3px; background:var(--blue); border-radius:0 3px 3px 0;
-}
-.nav-icon { font-size:1.1rem; width:22px; text-align:center; flex-shrink:0; }
-.nav-badge {
-  margin-left:auto; background:var(--yellow);
-  color:var(--dark); font-size:.65rem; font-weight:700;
-  padding:.12rem .5rem; border-radius:999px;
-}
-.sidebar-bottom { margin-top:auto; padding:1rem .8rem; }
-.promo-card {
-  background:linear-gradient(135deg,#0057ff 0%,#0d9488 100%);
-  border-radius:var(--r); padding:1.2rem; color:white;
-}
-.promo-card h4 { font-family:var(--font-display); font-style:italic; font-size:1.05rem; margin-bottom:.4rem; }
-.promo-card p { font-size:.82rem; opacity:.85; line-height:1.6; margin-bottom:.85rem; }
-.promo-btn {
-  width:100%; background:rgba(255,255,255,.18);
-  border:1px solid rgba(255,255,255,.35); color:white;
-  font-family:var(--font); font-size:.82rem; font-weight:700;
-  padding:.5rem 1rem; border-radius:8px; cursor:pointer; transition:background .2s;
-}
-.promo-btn:hover { background:rgba(255,255,255,.3); }
+        .nav-menu { flex-grow: 1; }
+        .nav-item { 
+            padding: 0.8rem 1rem; border-radius: 10px; margin-bottom: 0.5rem;
+            cursor: pointer; display: flex; align-items: center; gap: 10px;
+            transition: 0.2s; color: #64748b; text-decoration: none;
+        }
+        .nav-item:hover { background: #f0f7ff; color: var(--primary); }
+        .nav-item.active { background: var(--primary); color: white; }
 
-/* ── MAIN ── */
-.main { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; }
+        /* MAIN CONTENT */
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; height: 100vh; }
+        .header { 
+            height: 70px; background: white; border-bottom: 1px solid #e2e8f0;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 2rem;
+        }
+        .user-pic { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
 
-.tabs {
-  display:flex; gap:.25rem; padding:.75rem 1.4rem .55rem;
-  border-bottom:1px solid var(--border); background:var(--white);
-  flex-shrink:0; overflow-x:auto;
-}
-.tab {
-  padding:.48rem 1.15rem; border-radius:9px;
-  font-family:var(--font); font-size:.9rem; /* bien lisible */
-  cursor:pointer; color:var(--muted);
-  border:none; background:none; transition:all .18s; white-space:nowrap;
-}
-.tab.active { background:var(--blue-pale); color:var(--blue); font-weight:700; }
-.tab:hover:not(.active) { background:var(--bg); color:var(--mid); }
+        /* ZONE DE TRAVAIL */
+        .lab-container { 
+            display: grid; grid-template-columns: 1fr 400px; gap: 1.5rem;
+            padding: 1.5rem; flex-grow: 1; overflow: hidden;
+        }
 
-/* ── CONTENT ── */
-.content { flex:1; display:flex; overflow:hidden; min-height:0; }
+        .doc-analysis { 
+            background: white; border-radius: 20px; border: 1px solid #e2e8f0;
+            display: flex; flex-direction: column; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
 
-/* UPLOAD PANEL */
-.upload-panel {
-  width:290px; flex-shrink:0;
-  border-right:1px solid var(--border);
-  background:var(--white); display:flex; flex-direction:column; overflow-y:auto;
-}
-.panel-head { padding:1.2rem 1.2rem .8rem; border-bottom:1px solid var(--border); }
-.panel-head h3 { font-family:var(--font-display); font-style:italic; font-size:1.1rem; margin-bottom:.25rem; }
-.panel-head p { font-size:.82rem; color:var(--muted); line-height:1.55; }
-.drop-zone {
-  margin:1rem; border:2px dashed #aac0f5; border-radius:var(--r);
-  padding:2rem 1rem; text-align:center; background:var(--blue-pale2);
-  cursor:pointer; transition:all .2s;
-}
-.drop-zone:hover,.drop-zone.dragover { border-color:var(--blue); background:var(--blue-pale); transform:scale(1.01); }
-.drop-zone-icon { font-size:2.5rem; margin-bottom:.65rem; }
-.drop-zone h4 { font-family:var(--font-display); font-style:italic; font-size:1rem; margin-bottom:.3rem; }
-.drop-zone p { font-size:.8rem; color:var(--muted); line-height:1.55; }
-.drop-btn {
-  display:inline-block; margin-top:.7rem; background:var(--blue); color:white;
-  font-family:var(--font); font-size:.82rem; font-weight:700;
-  padding:.45rem 1.1rem; border-radius:7px; cursor:pointer; border:none; transition:background .2s;
-}
-.drop-btn:hover { background:var(--blue-mid); }
-#fileInput { display:none; }
-.doc-section { padding:.7rem 1.1rem 1rem; }
-.doc-section-title {
-  font-size:.68rem; font-weight:700; letter-spacing:2px;
-  text-transform:uppercase; color:var(--light-text); margin-bottom:.65rem;
-}
-.doc-item {
-  display:flex; align-items:center; gap:.65rem;
-  padding:.6rem .75rem; border-radius:9px;
-  background:var(--bg); border:1px solid var(--border);
-  margin-bottom:.5rem; cursor:pointer; transition:all .18s;
-}
-.doc-item:hover,.doc-item.selected { background:var(--blue-pale); border-color:#b0c8f8; }
-.doc-icon { width:32px; height:32px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:.9rem; flex-shrink:0; }
-.doc-icon.pdf { background:#fee2e2; }
-.doc-icon.img { background:#dcfce7; }
-.doc-icon.doc { background:#dbeafe; }
-.doc-info { flex:1; min-width:0; }
-.doc-name { font-size:.85rem; font-weight:700; color:var(--dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.doc-meta { font-size:.72rem; color:var(--light-text); font-style:italic; }
-.doc-del { background:none; border:none; cursor:pointer; color:var(--light-text); font-size:.9rem; opacity:0; transition:opacity .2s; padding:.15rem; border-radius:4px; }
-.doc-item:hover .doc-del { opacity:1; }
-.doc-del:hover { color:var(--red); background:#fee2e2; }
-.topic-section { padding:0 1.1rem 1rem; }
-.topic-section-title { font-size:.68rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--light-text); margin-bottom:.6rem; }
-.topic-chips { display:flex; flex-wrap:wrap; gap:.4rem; }
-.topic-chip {
-  background:var(--blue-pale2); border:1px solid #c0d4f8; color:var(--blue);
-  font-family:var(--font); font-size:.78rem; font-style:italic;
-  padding:.28rem .7rem; border-radius:999px; cursor:pointer; transition:all .18s;
-}
-.topic-chip:hover { background:var(--blue); color:white; border-color:var(--blue); }
+        .upload-zone {
+            border: 2px dashed #cbd5e1; border-radius: 15px; padding: 3rem;
+            text-align: center; cursor: pointer; transition: 0.3s; margin-bottom: 1rem;
+        }
+        .upload-zone:hover { border-color: var(--primary); background: #f8fbff; }
 
-/* CHAT PANEL */
-.chat-panel { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; background:var(--bg); }
-.chat-header {
-  padding:.85rem 1.4rem; border-bottom:1px solid var(--border);
-  background:var(--white); display:flex; align-items:center; gap:.85rem; flex-shrink:0;
-}
-.ai-avatar {
-  width:42px; height:42px; border-radius:12px;
-  background:linear-gradient(135deg,#0057ff,#0d9488);
-  display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0;
-}
-.chat-header-info h4 { font-family:var(--font-display); font-style:italic; font-size:1.05rem; color:var(--dark); }
-.chat-header-info p { font-size:.78rem; color:var(--green); display:flex; align-items:center; gap:.3rem; }
-.chat-header-info p::before { content:''; width:7px; height:7px; background:var(--green); border-radius:50%; display:inline-block; }
-.chat-header-actions { margin-left:auto; display:flex; gap:.5rem; }
-.icon-btn {
-  background:none; border:1px solid var(--border); border-radius:7px;
-  padding:.36rem .75rem; font-family:var(--font); font-size:.8rem;
-  color:var(--muted); cursor:pointer; transition:all .18s;
-  display:flex; align-items:center; gap:.28rem; white-space:nowrap;
-}
-.icon-btn:hover { background:var(--blue-pale); color:var(--blue); border-color:#b0c8f8; }
+        .chat-module { 
+            background: white; border-radius: 20px; border: 1px solid #e2e8f0;
+            display: flex; flex-direction: column; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .chat-header { padding: 1rem; border-bottom: 1px solid #f1f5f9; font-weight: 600; }
+        .chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; background: #fafbfc; display: flex; flex-direction: column; }
+        .message { margin-bottom: 1rem; padding: 0.8rem; border-radius: 12px; font-size: 0.9rem; max-width: 85%; }
+        .msg-ai { background: white; border: 1px solid #e2e8f0; align-self: flex-start; }
+        .msg-user { background: var(--primary); color: white; align-self: flex-end; }
 
-/* MESSAGES */
-.chat-messages { flex:1; overflow-y:auto; padding:1.4rem; display:flex; flex-direction:column; gap:1.1rem; }
-.msg-row { display:flex; gap:.7rem; align-items:flex-end; animation:fadeUp .3s ease; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-.msg-row.user { flex-direction:row-reverse; margin-left:auto; max-width:74%; }
-.msg-row.ai { max-width:80%; }
-.msg-av {
-  width:30px; height:30px; border-radius:8px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:.72rem; font-weight:700; flex-shrink:0;
-}
-.msg-av.ai   { background:linear-gradient(135deg,#0057ff,#0d9488); color:white; }
-.msg-av.user { background:linear-gradient(135deg,#f59e0b,#ef4444); color:white; }
-.msg-bubble {
-  padding:.9rem 1.15rem; border-radius:14px;
-  font-size:1rem; /* GRAND — bien lisible */
-  line-height:1.8; font-family:var(--font);
-}
-.msg-bubble.ai {
-  background:var(--white); border:1px solid var(--border);
-  color:var(--dark); border-radius:14px 14px 14px 3px;
-  box-shadow:var(--sh-sm);
-}
-.msg-bubble.user {
-  background:linear-gradient(135deg,var(--blue),var(--blue-mid));
-  color:white; border-radius:14px 14px 3px 14px;
-}
-.formula {
-  background:var(--blue-pale); border:1px solid #b0c4f5;
-  color:var(--blue); font-family:var(--font-mono); font-size:.85rem;
-  padding:.12rem .5rem; border-radius:5px; display:inline-block; margin:.05rem;
-}
-.kw { background:var(--yellow-pale); color:var(--yellow-dark); font-weight:700; border-radius:3px; padding:.02rem .28rem; }
-.msg-time { font-size:.68rem; color:var(--light-text); margin-top:.28rem; padding:0 .3rem; font-style:italic; }
-.msg-row.user .msg-time { text-align:right; }
+        .chat-input-area { padding: 1rem; border-top: 1px solid #f1f5f9; display: flex; gap: 8px; }
+        input[type="text"] { flex-grow: 1; padding: 0.8rem; border: 1px solid #e2e8f0; border-radius: 10px; outline: none; }
+        .send-btn { background: var(--primary); color: white; border: none; padding: 0.8rem 1.2rem; border-radius: 10px; cursor: pointer; }
 
-/* WELCOME */
-.welcome-card { background:var(--white); border:1px solid var(--border); border-radius:16px; padding:1.6rem; box-shadow:var(--sh-sm); }
-.welcome-card h3 { font-family:var(--font-display); font-style:italic; font-size:1.25rem; color:var(--dark); margin-bottom:.5rem; }
-.welcome-card p { font-size:.95rem; color:var(--muted); line-height:1.75; margin-bottom:1.1rem; font-style:italic; }
-.qa-grid { display:flex; flex-wrap:wrap; gap:.5rem; }
-.qa-btn {
-  background:var(--blue-pale2); border:1px solid #c0d4f8; color:var(--blue);
-  font-family:var(--font); font-style:italic; font-size:.85rem;
-  padding:.42rem .95rem; border-radius:8px; cursor:pointer; transition:all .18s;
-}
-.qa-btn:hover { background:var(--blue); color:white; border-color:var(--blue); transform:translateY(-1px); }
-
-/* TYPING */
-.typing-wrap { display:flex; gap:.7rem; align-items:flex-end; animation:fadeUp .3s ease; }
-.typing-bubble {
-  background:var(--white); border:1px solid var(--border);
-  border-radius:14px 14px 14px 3px; padding:.8rem 1.1rem;
-  display:flex; align-items:center; gap:.4rem; box-shadow:var(--sh-sm);
-}
-.t-dot { width:8px; height:8px; background:var(--blue-mid); border-radius:50%; animation:tdot 1s infinite; }
-.t-dot:nth-child(2){animation-delay:.18s} .t-dot:nth-child(3){animation-delay:.36s}
-@keyframes tdot{0%,60%,100%{transform:scale(1);opacity:.45}30%{transform:scale(1.4);opacity:1}}
-
-/* INPUT */
-.chat-input-area { padding:1rem 1.4rem; border-top:1px solid var(--border); background:var(--white); flex-shrink:0; }
-.input-wrap {
-  display:flex; align-items:flex-end; gap:.65rem;
-  background:var(--bg); border:2px solid var(--border);
-  border-radius:13px; padding:.65rem .85rem;
-  transition:border-color .2s, box-shadow .2s;
-}
-.input-wrap:focus-within { border-color:var(--blue); box-shadow:0 0 0 3px rgba(0,87,255,.09); }
-.chat-textarea {
-  flex:1; min-width:0; background:transparent; border:none; outline:none;
-  font-family:var(--font); font-size:1rem; /* GRAND */
-  color:var(--dark); resize:none; max-height:130px; line-height:1.6; padding:.1rem 0;
-}
-.chat-textarea::placeholder { color:#9baac8; font-style:italic; }
-.input-actions { display:flex; align-items:center; gap:.4rem; flex-shrink:0; }
-.attach-btn { background:none; border:none; cursor:pointer; color:var(--muted); font-size:1.2rem; padding:.25rem; border-radius:6px; transition:all .18s; }
-.attach-btn:hover { color:var(--blue); background:var(--blue-pale); }
-.send-btn {
-  background:var(--blue); border:none; color:white;
-  width:38px; height:38px; border-radius:10px;
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer; transition:all .2s; flex-shrink:0;
-}
-.send-btn:hover { background:var(--blue-mid); transform:scale(1.06); }
-.send-btn:disabled { opacity:.4; cursor:not-allowed; transform:none; }
-.send-btn svg { width:17px; height:17px; }
-.input-hint { font-size:.72rem; color:var(--light-text); margin-top:.4rem; text-align:right; font-style:italic; }
-
-/* PUBLICATIONS */
-.pub-panel { flex:1; padding:1.6rem; overflow-y:auto; display:none; }
-.pub-panel.show { display:block; }
-.pub-panel-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.3rem; }
-.pub-panel-header h2 { font-family:var(--font-display); font-style:italic; font-size:1.3rem; }
-.add-btn {
-  background:var(--blue); color:white; border:none; font-family:var(--font);
-  font-size:.85rem; font-weight:700; padding:.45rem 1.1rem; border-radius:8px; cursor:pointer; transition:background .2s;
-}
-.add-btn:hover { background:var(--blue-mid); }
-.pub-card {
-  background:var(--white); border:1px solid var(--border); border-radius:var(--r);
-  padding:1.4rem 1.6rem; margin-bottom:1rem; box-shadow:var(--sh-sm);
-  display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;
-  transition:all .2s;
-}
-.pub-card:hover { box-shadow:var(--sh-md); border-color:#b0c8f8; transform:translateY(-2px); }
-.pub-card h4 { font-family:var(--font-display); font-style:italic; font-size:1.05rem; margin-bottom:.3rem; }
-.pub-card p { font-size:.85rem; color:var(--muted); font-style:italic; }
-.pub-badge { padding:.3rem .85rem; border-radius:999px; font-size:.72rem; font-weight:700; white-space:nowrap; flex-shrink:0; }
-.pub-badge.ok  { background:#dcfce7; color:var(--green); }
-.pub-badge.rev { background:var(--yellow-pale); color:var(--yellow-dark); }
-.pub-badge.ip  { background:var(--blue-pale); color:var(--blue); }
-
-/* OVERLAY */
-.overlay { display:none; position:fixed; inset:0; background:rgba(10,14,42,.35); z-index:40; backdrop-filter:blur(2px); }
-
-/* ═══════════════════════════
-   RESPONSIVE — TOUS APPAREILS
-═══════════════════════════ */
-
-/* Grand écran ≥ 1440px */
-@media (min-width:1440px) {
-  html { font-size:19px; }
-  :root { --sidebar-w:290px; }
-  .upload-panel { width:310px; }
-}
-
-/* Laptop standard 1024–1439px */
-@media (max-width:1280px) {
-  .upload-panel { width:260px; }
-}
-
-/* Tablette paysage 900–1023px */
-@media (max-width:1023px) {
-  .upload-panel { width:240px; }
-}
-
-/* Tablette portrait 640–899px */
-@media (max-width:899px) {
-  .upload-panel { display:none; }
-  .upload-panel.open {
-    display:flex; position:fixed;
-    inset:0; top:var(--topbar-h);
-    width:min(340px,95vw); z-index:45;
-    border-right:1px solid var(--border);
-    box-shadow:var(--sh-md);
-  }
-}
-
-/* Smartphone 0–639px */
-@media (max-width:639px) {
-  html { font-size:16px; } /* légèrement réduit sur très petit écran */
-  :root { --sidebar-w:250px; --topbar-h:58px; }
-  .sidebar {
-    position:fixed; left:0; top:var(--topbar-h);
-    height:calc(100% - var(--topbar-h)); z-index:50;
-    transform:translateX(-100%); box-shadow:var(--sh-md);
-  }
-  .sidebar.open { transform:translateX(0); }
-  .overlay { display:block; opacity:0; pointer-events:none; transition:opacity .3s; }
-  .overlay.show { opacity:1; pointer-events:all; }
-  .menu-btn { display:flex; }
-  .topbar-status, .brand-lab, .topbar-divider, .topbar-flag { display:none; }
-  .brand-main, .brand-ai { font-size:1.25rem; }
-  .chat-header-actions { display:none; }
-  .tabs { padding:.5rem .9rem .4rem; }
-  .tab { font-size:.82rem; padding:.4rem .8rem; }
-  .chat-messages { padding:1rem; gap:.9rem; }
-  .msg-bubble { font-size:.95rem; }
-  .msg-row.ai,.msg-row.user { max-width:96%; }
-  .chat-input-area { padding:.8rem 1rem; }
-  .chat-textarea { font-size:.95rem; }
-  .pub-panel { padding:1rem; }
-}
-
-/* iPhone SE / très petit 320px */
-@media (max-width:380px) {
-  html { font-size:15px; }
-  .brand-main, .brand-ai { font-size:1.1rem; }
-}
-</style>
+        @media (max-width: 1024px) {
+            .sidebar { width: 80px; padding: 1rem; }
+            .logo-title, .nav-text, .logo-sub { display: none; }
+            .lab-container { grid-template-columns: 1fr; overflow-y: auto; }
+            .chat-module { height: 450px; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <button class="menu-btn" id="menuBtn" onclick="toggleSidebar()" aria-label="Menu">
-    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-    </svg>
-  </button>
-  <div style="display:flex;align-items:baseline;gap:.4rem">
-    <span class="brand-main">Mon Espoir</span>
-    <span class="brand-ai">AI</span>
-    <span class="brand-lab">Lab</span>
-  </div>
-  <div class="topbar-divider"></div>
-  <span class="topbar-flag">🇧🇮 Bujumbura · Burundi</span>
-  <div class="topbar-spacer"></div>
-  <div class="topbar-status"><div class="status-dot"></div>IA Active — Claude</div>
-  <div class="topbar-avatar" title="IRANKUNDA Mon-Espoir">
-    <img src="images/pic01.jpg" alt="Mon-Espoir" onerror="this.style.display='none';this.parentElement.textContent='ME'"/>
-  </div>
-</div>
-
-<div class="overlay" id="overlay" onclick="closeAll()"></div>
-
-<div class="app-body">
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-section">Navigation</div>
-    <button class="nav-item active" onclick="setNav(this,'chat')"><span class="nav-icon">🤖</span>Assistant IA<span class="nav-badge">Live</span></button>
-    <button class="nav-item" onclick="setNav(this,'pubs')"><span class="nav-icon">📝</span>Publications</button>
-    <button class="nav-item" onclick="setNav(this,'docs')"><span class="nav-icon">📁</span>Documents</button>
-    <button class="nav-item" onclick="setNav(this,'chat')"><span class="nav-icon">🔬</span>Labo Virtuel</button>
-    <button class="nav-item" onclick="setNav(this,'chat')"><span class="nav-icon">📊</span>Mes Progrès</button>
-    <div class="sidebar-section">Outils</div>
-    <button class="nav-item" onclick="setNav(this,'chat')"><span class="nav-icon">⚗️</span>Formules Chimie</button>
-    <button class="nav-item" onclick="setNav(this,'chat')"><span class="nav-icon">🌐</span>Recherche Web</button>
-    <button class="nav-item" onclick="setNav(this,'chat')"><span class="nav-icon">⚙️</span>Paramètres</button>
-    <div class="sidebar-bottom">
-      <div class="promo-card">
-        <h4>✨ Passer au Pro</h4>
-        <p>Analyses illimitées, formules avancées, accès complet à tous les modules scientifiques.</p>
-        <button class="promo-btn">Découvrir le Pro →</button>
-      </div>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main">
-    <div class="tabs">
-      <button class="tab active" onclick="setTab(this,'chat')">💬 Chat IA</button>
-      <button class="tab" onclick="setTab(this,'docs')">📎 Documents</button>
-      <button class="tab" onclick="setTab(this,'pubs')">📝 Publications</button>
-      <button class="tab" onclick="setTab(this,'chat')">⚗️ Formules</button>
-    </div>
-
-    <div class="content">
-      <!-- UPLOAD PANEL -->
-      <div class="upload-panel" id="uploadPanel">
-        <div class="panel-head">
-          <h3>📁 Mes Documents</h3>
-          <p>Uploadez articles, cours et données scientifiques pour analyse IA.</p>
+    <aside class="sidebar">
+        <div class="logo-area">
+            <div class="logo-title">MON ESPOIR</div>
+            <div class="logo-sub">AI LAB RECHERCHE</div>
         </div>
-        <div class="drop-zone" id="dropZone"
-             onclick="document.getElementById('fileInput').click()"
-             ondragover="onDragOver(event,true)" ondragleave="onDragOver(event,false)" ondrop="onDrop(event)">
-          <div class="drop-zone-icon">📂</div>
-          <h4>Glissez vos fichiers ici</h4>
-          <p>PDF, DOCX, images, articles<br/>Max 20 Mo par fichier</p>
-          <button class="drop-btn">Choisir un fichier</button>
-        </div>
-        <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.txt,.doc,.docx" onchange="onFiles(this.files)"/>
-        <div class="doc-section">
-          <div class="doc-section-title">Fichiers chargés</div>
-          <div id="docList">
-            <div class="doc-item selected">
-              <div class="doc-icon pdf">📄</div>
-              <div class="doc-info"><div class="doc-name">Polymères_Biodégradables.pdf</div><div class="doc-meta">2.4 Mo · Analysé ✓</div></div>
-              <button class="doc-del" onclick="removeDoc(this)">✕</button>
-            </div>
-            <div class="doc-item">
-              <div class="doc-icon img">🖼️</div>
-              <div class="doc-info"><div class="doc-name">Formule_PET_Nylon.png</div><div class="doc-meta">840 Ko · En attente</div></div>
-              <button class="doc-del" onclick="removeDoc(this)">✕</button>
-            </div>
-          </div>
-        </div>
-        <div class="topic-section">
-          <div class="topic-section-title">Sujets rapides</div>
-          <div class="topic-chips">
-            <button class="topic-chip" onclick="insertTopic(this)">Polymères</button>
-            <button class="topic-chip" onclick="insertTopic(this)">Thermodynamique</button>
-            <button class="topic-chip" onclick="insertTopic(this)">Cinétique chimique</button>
-            <button class="topic-chip" onclick="insertTopic(this)">Spectroscopie FTIR</button>
-            <button class="topic-chip" onclick="insertTopic(this)">Analyse DSC</button>
-            <button class="topic-chip" onclick="insertTopic(this)">Biopolymères</button>
-            <button class="topic-chip" onclick="insertTopic(this)">Saponines</button>
-          </div>
-        </div>
-      </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active"><span>🧪</span> <span class="nav-text">Laboratoire</span></a>
+            <a href="#" class="nav-item"><span>📚</span> <span class="nav-text">Bibliothèque</span></a>
+            <a href="#" class="nav-item"><span>⚗️</span> <span class="nav-text">Expert Chimie</span></a>
+            <a href="#" class="nav-item"><span>🎓</span> <span class="nav-text">Réussite Académique</span></a>
+        </nav>
+    </aside>
 
-      <!-- CHAT PANEL -->
-      <div class="chat-panel" id="chatPanel">
-        <div class="chat-header">
-          <div class="ai-avatar">🤖</div>
-          <div class="chat-header-info">
-            <h4>IRANKUNDA AI — Assistant Scientifique</h4>
-            <p>Actif · Spécialiste Chimie, IA & Recherche</p>
-          </div>
-          <div class="chat-header-actions">
-            <button class="icon-btn" onclick="clearChat()">🗑 Effacer</button>
-            <button class="icon-btn" onclick="toggleDocs()">📎 Documents</button>
-          </div>
-        </div>
+    <main class="main-content">
+        <header class="header">
+            <div><strong>Kaze munzu ya Mon-Espoir !</strong> <span style="color: var(--secondary); margin-left: 10px;">Assistant intelligent pour toute la Chimie.</span></div>
+            <img src="images/pic01.jpg" alt="Profil" class="user-pic">
+        </header>
 
-        <div class="chat-messages" id="chatMessages">
-          <div class="msg-row ai">
-            <div class="msg-av ai">IA</div>
-            <div>
-              <div class="msg-bubble ai">
-                <div class="welcome-card">
-                  <h3>⚗️ Bienvenue sur <em>Mon Espoir AI Lab</em> !</h3>
-                  <p>Je suis votre assistant scientifique spécialisé en <strong>chimie des polymères</strong>, analyse d'articles et formules complexes. Propulsé par <em>Claude AI</em> — conçu pour les étudiants du Burundi 🇧🇮.</p>
-                  <div class="qa-grid">
-                    <button class="qa-btn" onclick="quickAsk(this)">🔬 Explique la polymérisation</button>
-                    <button class="qa-btn" onclick="quickAsk(this)">⚗️ Formule du Nylon-6,6</button>
-                    <button class="qa-btn" onclick="quickAsk(this)">🧪 Qu'est-ce que le DSC ?</button>
-                    <button class="qa-btn" onclick="quickAsk(this)">📊 GPC vs FTIR : différences</button>
-                    <button class="qa-btn" onclick="quickAsk(this)">🌿 Saponines des plantes locales</button>
-                    <button class="qa-btn" onclick="quickAsk(this)">💧 Traitement eaux usées Bujumbura</button>
-                  </div>
+        <div class="lab-container">
+            <section class="doc-analysis">
+                <h3>🔬 Analyseur de Documents</h3>
+                <div class="upload-zone">
+                    <p style="font-size: 2rem;">📄</p>
+                    <p><strong>Déposez votre cours ou article de chimie ici</strong></p>
+                    <p style="color: #64748b; font-size: 0.8rem;">Formats acceptés : PDF, DOCX</p>
                 </div>
-              </div>
-              <div class="msg-time">Maintenant</div>
-            </div>
-          </div>
+                <div style="background: #f8fbff; padding: 1rem; border-radius: 10px; flex-grow: 1;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Résumé :</h4>
+                    <p id="resumé-text" style="color: #475569; font-size: 0.9rem; font-style: italic;">
+                        En attente d'un document pour générer l'analyse scientifique...
+                    </p>
+                </div>
+            </section>
+
+            <section class="chat-module">
+                <div class="chat-header">💬 Assistant IA Scientifique</div>
+                <div class="chat-messages" id="chat-box">
+                    <div class="message msg-ai">Kaze munzu ya Mon-Espoir ! Je suis prêt à vous aider pour vos recherches ou exercices de chimie. Quelle est votre question ?</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="Posez votre question ici...">
+                    <button class="send-btn" onclick="sendMessage()">Envoyer</button>
+                </div>
+            </section>
         </div>
+    </main>
 
-        <div class="chat-input-area">
-          <div class="input-wrap">
-            <textarea class="chat-textarea" id="chatInput" rows="1"
-              placeholder="Posez votre question scientifique… (Entrée = envoyer)"
-              oninput="autoResize(this)" onkeydown="onKey(event)"></textarea>
-            <div class="input-actions">
-              <button class="attach-btn" onclick="document.getElementById('fileInput').click()" title="Joindre">📎</button>
-              <button class="send-btn" id="sendBtn" onclick="sendMsg()">
-                <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="input-hint">Modèle : Claude Sonnet · Vos données restent privées 🔒</div>
-        </div>
-      </div>
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const chatBox = document.getElementById('chat-box');
+            if (input.value.trim() !== "") {
+                const userMsg = document.createElement('div');
+                userMsg.className = 'message msg-user';
+                userMsg.textContent = input.value;
+                chatBox.appendChild(userMsg);
+                
+                setTimeout(() => {
+                    const aiMsg = document.createElement('div');
+                    aiMsg.className = 'message msg-ai';
+                    aiMsg.textContent = "Je traite votre demande scientifique... (Connectez le backend pour une réponse réelle).";
+                    chatBox.appendChild(aiMsg);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 1000);
 
-      <!-- PUBLICATIONS PANEL -->
-      <div class="pub-panel" id="pubPanel">
-        <div class="pub-panel-header">
-          <h2>Mes Publications & Travaux</h2>
-          <button class="add-btn" onclick="addPub()">+ Ajouter</button>
-        </div>
-        <div id="pubList">
-          <div class="pub-card"><div><h4>Analyse des Saponines dans les plantes locales du Burundi</h4><p>Chimie Organique · Université du Burundi · Mars 2024</p></div><span class="pub-badge ok">✓ Publié</span></div>
-          <div class="pub-card"><div><h4>Traitement des eaux usées à Bujumbura par biopolymères</h4><p>Chimie Environnementale · 2024</p></div><span class="pub-badge rev">⏳ En révision</span></div>
-          <div class="pub-card"><div><h4>Modélisation moléculaire des polymères biodégradables</h4><p>Théorie Moléculaire · Université du Burundi · Février 2024</p></div><span class="pub-badge ok">✓ Publié</span></div>
-          <div class="pub-card"><div><h4>IA appliquée à la prédiction des propriétés des polymères</h4><p>Data Science & Chimie · En rédaction · 2025</p></div><span class="pub-badge ip">✏️ En cours</span></div>
-        </div>
-      </div>
-    </div>
-  </main>
-</div>
-
-<script>
-/* ── UI ── */
-function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('show'); }
-function closeAll(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('uploadPanel').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); }
-function setNav(el,tab){ document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); el.classList.add('active'); showTab(tab); if(window.innerWidth<=639)closeAll(); }
-function setTab(el,tab){ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); el.classList.add('active'); showTab(tab); }
-function showTab(tab){
-  const chat=document.getElementById('chatPanel'), pub=document.getElementById('pubPanel'), up=document.getElementById('uploadPanel');
-  chat.style.display='flex'; pub.classList.remove('show'); up.classList.remove('open');
-  if(tab==='pubs'){ chat.style.display='none'; pub.classList.add('show'); }
-  else if(tab==='docs' && window.innerWidth<=899){ up.classList.add('open'); document.getElementById('overlay').classList.add('show'); }
-}
-function toggleDocs(){ if(window.innerWidth<=899){ document.getElementById('uploadPanel').classList.toggle('open'); document.getElementById('overlay').classList.toggle('show'); } }
-function onDragOver(e,over){ e.preventDefault(); document.getElementById('dropZone').classList.toggle('dragover',over); }
-function onDrop(e){ e.preventDefault(); onDragOver(e,false); onFiles(e.dataTransfer.files); }
-function onFiles(files){
-  const list=document.getElementById('docList');
-  Array.from(files).forEach(f=>{
-    const ext=f.name.split('.').pop().toLowerCase();
-    const isPdf=['pdf','doc','docx','txt'].includes(ext);
-    const isImg=['jpg','jpeg','png','gif'].includes(ext);
-    const size=f.size>1024*1024?(f.size/(1024*1024)).toFixed(1)+' Mo':Math.round(f.size/1024)+' Ko';
-    const div=document.createElement('div'); div.className='doc-item';
-    const ic=isPdf?'pdf':isImg?'img':'doc'; const em=isPdf?'📄':isImg?'🖼️':'📘';
-    div.innerHTML=`<div class="doc-icon ${ic}">${em}</div><div class="doc-info"><div class="doc-name">${f.name}</div><div class="doc-meta">${size} · Prêt</div></div><button class="doc-del" onclick="removeDoc(this)">✕</button>`;
-    list.appendChild(div);
-  });
-}
-function removeDoc(btn){ btn.closest('.doc-item').remove(); }
-function insertTopic(btn){ const i=document.getElementById('chatInput'); i.value='Explique-moi en détail : '+btn.textContent; i.focus(); autoResize(i); }
-function quickAsk(btn){ document.getElementById('chatInput').value=btn.textContent.replace(/^[^\s]+\s/,'').trim(); sendMsg(); }
-function addPub(){ const t=prompt('Titre de la publication :'); if(!t)return; const d=document.createElement('div'); d.className='pub-card'; d.innerHTML=`<div><h4>${t}</h4><p>Nouvelle publication · ${new Date().toLocaleDateString('fr')}</p></div><span class="pub-badge ip">✏️ En cours</span>`; document.getElementById('pubList').insertBefore(d,document.getElementById('pubList').firstChild); }
-function clearChat(){ if(!confirm('Effacer la conversation ?'))return; document.getElementById('chatMessages').innerHTML=''; chatHistory=[]; }
-function autoResize(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,130)+'px'; }
-function onKey(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendMsg(); } }
-
-/* ── FORMAT RÉPONSE ── */
-function fmt(t){
-  t=t.replace(/`([^`\n]+)`/g,'<span class="formula">$1</span>');
-  t=t.replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>');
-  t=t.replace(/\*([^*\n]+)\*/g,'<em>$1</em>');
-  t=t.replace(/\n/g,'<br/>');
-  ['polymère','polymères','monomère','biopolymère','FTIR','DSC','GPC','TGA','Tg','Tm','PET','PLA','Nylon','polyéthylène','polypropylène','saponine','saponines','spectroscopie','thermodynamique','cinétique'].forEach(k=>{
-    t=t.replace(new RegExp(`\\b(${k}s?)\\b`,'gi'),'<span class="kw">$1</span>');
-  });
-  return t;
-}
-
-/* ── CLAUDE AI ── */
-const SYS=`Tu es IRANKUNDA AI, l'assistant scientifique de "Mon Espoir AI Lab", fondé par IRANKUNDA Mon-Espoir, étudiant Bac 3 Chimie des Polymères, Université du Burundi, Bujumbura 🇧🇮.
-Spécialités : chimie des polymères, FTIR, DSC, GPC, TGA, biopolymères, chimie organique, environnementale.
-Mets toujours les formules chimiques entre backticks: \`CH₂=CH₂\`, \`[-CH₂-CH₂-]n\`.
-Utilise **gras** pour concepts clés. Réponds en français, pédagogique, clair, encourageant pour les étudiants africains.`;
-
-let chatHistory=[], isSending=false;
-
-async function sendMsg(){
-  if(isSending)return;
-  const inp=document.getElementById('chatInput'), btn=document.getElementById('sendBtn'), msgs=document.getElementById('chatMessages');
-  const txt=inp.value.trim(); if(!txt)return;
-  isSending=true; inp.value=''; inp.style.height='auto'; btn.disabled=true;
-  const now=new Date().toLocaleTimeString('fr',{hour:'2-digit',minute:'2-digit'});
-  const uRow=document.createElement('div'); uRow.className='msg-row user';
-  uRow.innerHTML=`<div class="msg-av user">ME</div><div><div class="msg-bubble user">${txt.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div><div class="msg-time">${now}</div></div>`;
-  msgs.appendChild(uRow); msgs.scrollTop=msgs.scrollHeight;
-  const tid='t'+Date.now(); const tRow=document.createElement('div'); tRow.className='typing-wrap'; tRow.id=tid;
-  tRow.innerHTML=`<div class="msg-av ai">IA</div><div class="typing-bubble"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div>`;
-  msgs.appendChild(tRow); msgs.scrollTop=msgs.scrollHeight;
-  chatHistory.push({role:'user',content:txt});
-  try{
-    /* 🔒 PRODUCTION NODE.JS : remplacer ce fetch par :
-       const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:txt,history:chatHistory})});
-       Cela garde votre clé API sécurisée côté serveur. */
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,system:SYS,messages:chatHistory})});
-    if(!res.ok)throw new Error('HTTP '+res.status);
-    const data=await res.json();
-    const reply=data.content?.[0]?.text||"Je n'ai pas pu répondre.";
-    chatHistory.push({role:'assistant',content:reply});
-    const rt=new Date().toLocaleTimeString('fr',{hour:'2-digit',minute:'2-digit'});
-    document.getElementById(tid).outerHTML=`<div class="msg-row ai"><div class="msg-av ai">IA</div><div><div class="msg-bubble ai">${fmt(reply)}</div><div class="msg-time">${rt}</div></div></div>`;
-  }catch(e){
-    document.getElementById(tid).outerHTML=`<div class="msg-row ai"><div class="msg-av ai">IA</div><div><div class="msg-bubble ai">⚠️ <strong>Connexion indisponible.</strong><br/><em>Pour activer l'IA en production, configurez le backend Node.js avec votre clé Anthropic.</em></div><div class="msg-time">Erreur</div></div></div>`;
-  }
-  btn.disabled=false; isSending=false; document.getElementById('chatMessages').scrollTop=99999;
-}
-</script>
+                input.value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+        document.getElementById('user-input').addEventListener('keypress', function(e){ if(e.key === 'Enter') sendMessage(); });
+    </script>
 </body>
 </html>
