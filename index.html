@@ -6,83 +6,102 @@
     <title>MON ESPOIR AI LAB | Chimie & Science</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #007bff;
-            --secondary: #28a745;
-            --hope-gold: #ffc107;
-            --bg-light: #f4f7fa;
-            --sidebar-color: #ffffff;
-            --text-main: #1a202c;
-        }
+    :root {
+        --primary: #0d6efd;
+        --primary-gradient: linear-gradient(135deg, #0d6efd 0%, #0045ad 100%);
+        --secondary: #28a745;
+        --bg-light: #f8fafc;
+        --sidebar-color: #ffffff;
+        --glass: rgba(255, 255, 255, 0.8);
+        --text-main: #1a202c;
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-light); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    body { 
+        background: radial-gradient(circle at top right, #e2e8f0, #f8fafc); 
+        display: flex; height: 100vh; overflow: hidden; color: var(--text-main);
+    }
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 280px; background: var(--sidebar-color);
-            border-right: 1px solid #e2e8f0; display: flex; flex-direction: column;
-            padding: 1.5rem; transition: all 0.3s ease;
-        }
-        .logo-area { margin-bottom: 2rem; }
-        .logo-title { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: -1px; }
-        .logo-sub { font-size: 0.7rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; }
+    /* Sidebar plus moderne */
+    .sidebar {
+        width: 280px; 
+        background: var(--sidebar-color);
+        border-right: 1px solid #e2e8f0;
+        box-shadow: 10px 0 30px rgba(0,0,0,0.03);
+        display: flex; flex-direction: column; padding: 1.5rem;
+    }
 
-        .nav-menu { flex-grow: 1; }
-        .nav-item { 
-            padding: 0.8rem 1rem; border-radius: 10px; margin-bottom: 0.5rem;
-            cursor: pointer; display: flex; align-items: center; gap: 10px;
-            transition: 0.2s; color: #64748b; text-decoration: none;
-        }
-        .nav-item:hover { background: #f0f7ff; color: var(--primary); }
-        .nav-item.active { background: var(--primary); color: white; }
+    .logo-title { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: -1px; }
+    .logo-sub { font-size: 0.7rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; }
 
-        /* MAIN CONTENT */
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; height: 100vh; }
-        .header { 
-            height: 70px; background: white; border-bottom: 1px solid #e2e8f0;
-            display: flex; align-items: center; justify-content: space-between; padding: 0 2rem;
-        }
-        .user-pic { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
+    .nav-item { 
+        padding: 0.8rem 1rem; border-radius: 10px; margin-bottom: 0.5rem;
+        cursor: pointer; display: flex; align-items: center; gap: 10px;
+        transition: 0.2s; color: #64748b; text-decoration: none;
+    }
+    .nav-item.active { background: var(--primary); color: white; }
 
-        /* ZONE DE TRAVAIL */
-        .lab-container { 
-            display: grid; grid-template-columns: 1fr 400px; gap: 1.5rem;
-            padding: 1.5rem; flex-grow: 1; overflow: hidden;
-        }
+    /* Main Content */
+    .main-content { flex-grow: 1; display: flex; flex-direction: column; }
+    .header { 
+        height: 70px; background: white; border-bottom: 1px solid #e2e8f0;
+        display: flex; align-items: center; justify-content: space-between; padding: 0 2rem;
+    }
+    .user-pic { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
 
-        .doc-analysis { 
-            background: white; border-radius: 20px; border: 1px solid #e2e8f0;
-            display: flex; flex-direction: column; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
+    .lab-container { 
+        display: grid; grid-template-columns: 1fr 400px; gap: 1.5rem;
+        padding: 1.5rem; flex-grow: 1; overflow: hidden;
+    }
 
-        .upload-zone {
-            border: 2px dashed #cbd5e1; border-radius: 15px; padding: 3rem;
-            text-align: center; cursor: pointer; transition: 0.3s; margin-bottom: 1rem;
-        }
-        .upload-zone:hover { border-color: var(--primary); background: #f8fbff; }
+    /* Bulles de chat style "Glassmorphism" */
+    .chat-module { 
+        background: white; border-radius: 20px; border: 1px solid #e2e8f0;
+        display: flex; flex-direction: column; box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    }
+    .chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
 
-        .chat-module { 
-            background: white; border-radius: 20px; border: 1px solid #e2e8f0;
-            display: flex; flex-direction: column; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-        }
-        .chat-header { padding: 1rem; border-bottom: 1px solid #f1f5f9; font-weight: 600; }
-        .chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; background: #fafbfc; display: flex; flex-direction: column; }
-        .message { margin-bottom: 1rem; padding: 0.8rem; border-radius: 12px; font-size: 0.9rem; max-width: 85%; }
-        .msg-ai { background: white; border: 1px solid #e2e8f0; align-self: flex-start; }
-        .msg-user { background: var(--primary); color: white; align-self: flex-end; }
+    .message { padding: 0.9rem 1.2rem; border-radius: 15px; font-size: 0.9rem; max-width: 85%; line-height: 1.4; }
 
-        .chat-input-area { padding: 1rem; border-top: 1px solid #f1f5f9; display: flex; gap: 8px; }
-        input[type="text"] { flex-grow: 1; padding: 0.8rem; border: 1px solid #e2e8f0; border-radius: 10px; outline: none; }
-        .send-btn { background: var(--primary); color: white; border: none; padding: 0.8rem 1.2rem; border-radius: 10px; cursor: pointer; }
+    .msg-ai {
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        align-self: flex-start;
+    }
 
-        @media (max-width: 1024px) {
-            .sidebar { width: 80px; padding: 1rem; }
-            .logo-title, .nav-text, .logo-sub { display: none; }
-            .lab-container { grid-template-columns: 1fr; overflow-y: auto; }
-            .chat-module { height: 450px; }
-        }
-    </style>
+    .msg-user {
+        background: var(--primary-gradient);
+        color: white;
+        align-self: flex-end;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+    }
+
+    /* Bouton Rungika Moderne */
+    .chat-input-area { padding: 1.2rem; border-top: 1px solid #f1f5f9; display: flex; gap: 10px; }
+    input[type="text"] { flex-grow: 1; padding: 0.8rem; border: 1.5px solid #e2e8f0; border-radius: 12px; outline: none; transition: 0.3s; }
+    input[type="text"]:focus { border-color: var(--primary); }
+
+    .send-btn {
+        background: var(--primary-gradient);
+        color: white; border: none;
+        padding: 0.8rem 1.5rem; border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+        transition: transform 0.2s, box-shadow 0.2s;
+        font-weight: 600; cursor: pointer;
+    }
+    .send-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(13, 110, 253, 0.4); }
+
+    /* Analyseur de Doc */
+    .doc-analysis { background: white; border-radius: 20px; padding: 1.5rem; border: 1px solid #e2e8f0; }
+    .upload-zone {
+        border: 2px dashed #cbd5e1; border-radius: 15px; padding: 2rem;
+        text-align: center; cursor: pointer; transition: 0.3s;
+    }
+    .upload-zone:hover { border-color: var(--primary); background: #f0f7ff; }
+</style>
 </head>
 <body>
 
