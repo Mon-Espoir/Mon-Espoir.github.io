@@ -108,15 +108,19 @@
         <div class="lab-container">
             <section class="doc-analysis">
                 <h3>🔬 Analyseur de Documents</h3>
-                <div class="upload-zone">
+                
+                <!-- 1. AJOUT DU BOUTON CACHÉ ICI -->
+                <input type="file" id="fileInput" style="display: none;" accept=".pdf,.docx,.jpg">
+
+                <div class="upload-zone" id="upload-box">
                     <p style="font-size: 2rem;">📄</p>
-                    <p><strong>Déposez votre cours ou article de chimie ici</strong></p>
+                    <p><strong>Déposez votre Exercice , cours ou article de chimie ici</strong></p>
                     <p style="color: #64748b; font-size: 0.8rem;">Formats acceptés : PDF, DOCX</p>
                 </div>
                 <div style="background: #f8fbff; padding: 1rem; border-radius: 10px; flex-grow: 1;">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Résumé :</h4>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Résumé ou INYISHU:</h4>
                     <p id="resumé-text" style="color: #475569; font-size: 0.9rem; font-style: italic;">
-                        En attente d'un document pour générer l'analyse scientifique...
+                         RINDIRA GATO Patientez l'analyse scientifique est en cours...
                     </p>
                 </div>
             </section>
@@ -128,34 +132,92 @@
                 </div>
                 <div class="chat-input-area">
                     <input type="text" id="user-input" placeholder="Posez votre question ici...">
-                    <button class="send-btn" onclick="sendMessage()">Envoyer</button>
+                    <button class="send-btn" onclick="sendMessage()">Envoyer RUNGIKA </button>
                 </div>
             </section>
         </div>
     </main>
 
     <script>
-        function sendMessage() {
+        // --- 2. NOUVELLE FONCTION DE CHAT CONNECTÉE AU SERVEUR ---
+        async function sendMessage() {
             const input = document.getElementById('user-input');
             const chatBox = document.getElementById('chat-box');
-            if (input.value.trim() !== "") {
+            const text = input.value.trim();
+
+            if (text !== "") {
+                // Affiche message utilisateur
                 const userMsg = document.createElement('div');
                 userMsg.className = 'message msg-user';
-                userMsg.textContent = input.value;
+                userMsg.textContent = text;
                 chatBox.appendChild(userMsg);
                 
-                setTimeout(() => {
+                input.value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Affiche chargement (Rindira...)
+                const loadingMsg = document.createElement('div');
+                loadingMsg.className = 'message msg-ai';
+                loadingMsg.id = 'loading';
+                loadingMsg.innerHTML = "<em>Iriko iratekereza... (Analyse en cours)</em>";
+                chatBox.appendChild(loadingMsg);
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                try {
+                    // Connexion au serveur local
+                    const response = await fetch('http://localhost:3000/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: text })
+                    });
+                    const data = await response.json();
+
+                    document.getElementById('loading').remove();
                     const aiMsg = document.createElement('div');
                     aiMsg.className = 'message msg-ai';
-                    aiMsg.textContent = "Je traite votre demande scientifique... (Connectez le backend pour une réponse réelle).";
+                    aiMsg.textContent = data.reply; 
                     chatBox.appendChild(aiMsg);
-                    chatBox.scrollTop = chatBox.scrollHeight;
-                }, 1000);
 
-                input.value = "";
+                } catch (error) {
+                    if(document.getElementById('loading')) document.getElementById('loading').remove();
+                    const errorMsg = document.createElement('div');
+                    errorMsg.className = 'message msg-ai';
+                    errorMsg.style.color = 'red';
+                    errorMsg.textContent = "Erreur : Serveur non lancé. Utilise 'node index.js' dans ton terminal.";
+                    chatBox.appendChild(errorMsg);
+                }
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
         }
+
+        // --- 3. GESTION DE L'ANALYSE DE DOCUMENTS ---
+        const uploadBox = document.getElementById('upload-box');
+        const fileInput = document.getElementById('fileInput');
+
+        uploadBox.onclick = () => fileInput.click();
+
+        fileInput.onchange = async () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const resumeZone = document.getElementById('resumé-text');
+            resumeZone.innerText = "Iriko irasoma... Analyse de " + file.name;
+
+            const formData = new FormData();
+            formData.append('document', file);
+
+            try {
+                const response = await fetch('http://localhost:3000/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                resumeZone.innerText = data.reply;
+            } catch (error) {
+                resumeZone.innerText = "Hubaye ikibazo lors de l'analyse du document.";
+            }
+        };
+
         document.getElementById('user-input').addEventListener('keypress', function(e){ if(e.key === 'Enter') sendMessage(); });
     </script>
 </body>
