@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MON ESPOIR AI LAB | Chimie & Science</title>
+    <title>MON ESPOIR IRANKUNDA AI LAB | PLATEFORME Chimie & Science</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
     :root {
@@ -48,8 +48,15 @@
         height: 70px; background: white; border-bottom: 1px solid #e2e8f0;
         display: flex; align-items: center; justify-content: space-between; padding: 0 2rem;
     }
-    .user-pic { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
-
+.user-pic { 
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    border: 2px solid white; 
+    box-shadow: 0 0 15px rgba(13, 110, 253, 0.5); 
+    object-fit: cover; 
+    cursor: pointer;
+}
     .lab-container { 
         display: grid; grid-template-columns: 1fr 400px; gap: 1.5rem;
         padding: 1.5rem; flex-grow: 1; overflow: hidden;
@@ -107,20 +114,20 @@
 
     <aside class="sidebar">
         <div class="logo-area">
-            <div class="logo-title">MON ESPOIR</div>
+            <div class="logo-title">MON ESPOIR IRANKUNDA PLATEFORME</div>
             <div class="logo-sub">AI LAB RECHERCHE</div>
         </div>
         <nav class="nav-menu">
             <a href="#" class="nav-item active"><span>🧪</span> <span class="nav-text">Laboratoire</span></a>
-            <a href="#" class="nav-item"><span>📚</span> <span class="nav-text">Bibliothèque</span></a>
+            <a href="#" class="nav-item"><span>📚</span> <span class="nav-text">Bibliothèque( AMA TUYAUX YOSE, SYLLABUS, NIBINDI VYINSHI...)</span></a>
             <a href="#" class="nav-item"><span>⚗️</span> <span class="nav-text">Expert Chimie</span></a>
-            <a href="#" class="nav-item"><span>🎓</span> <span class="nav-text">Réussite Académique</span></a>
+            <a href="#" class="nav-item"><span>🎓</span> <span class="nav-text">Réussite Académique( UNIVERSITE DU BURUNDI)</span></a>
         </nav>
     </aside>
 
     <main class="main-content">
         <header class="header">
-            <div><strong>Kaze munzu ya Mon-Espoir !</strong> <span style="color: var(--secondary); margin-left: 10px;">Assistant intelligent pour toute la Chimie.</span></div>
+            <div><strong>Kaze! wisange Munzu ya Mon Espoir!</strong> <span style="color: var(--secondary); margin-left: 10px;">Assistant intelligent pour toute la Chimie. RONDERA URARONKA!</span></div>
             <img src="images/pic01.jpg" alt="Profil" class="user-pic">
         </header>
 
@@ -139,7 +146,7 @@
                 <div style="background: #f8fbff; padding: 1rem; border-radius: 10px; flex-grow: 1;">
                     <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Résumé ou INYISHU:</h4>
                     <p id="resumé-text" style="color: #475569; font-size: 0.9rem; font-style: italic;">
-                         RINDIRA GATO Patientez l'analyse scientifique est en cours...
+                         RINDIRA GATO... Patientez l'analyse scientifique est en cours...
                     </p>
                 </div>
             </section>
@@ -178,7 +185,7 @@
                 const loadingMsg = document.createElement('div');
                 loadingMsg.className = 'message msg-ai';
                 loadingMsg.id = 'loading';
-                loadingMsg.innerHTML = "<em>Iriko iratekereza... (Analyse en cours)</em>";
+                loadingMsg.innerHTML = "<em>NDIKO NDIYUMVIRA... (Analyse en cours)</em>";
                 chatBox.appendChild(loadingMsg);
                 chatBox.scrollTop = chatBox.scrollHeight;
 
