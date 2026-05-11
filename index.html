@@ -66,8 +66,15 @@
     .chat-module { 
         background: white; border-radius: 20px; border: 1px solid #e2e8f0;
         display: flex; flex-direction: column; box-shadow: 0 10px 15px rgba(0,0,0,0.05);
-    }
-    .chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+    }.chat-messages { 
+    height: 400px;           /* Sans cette ligne, le scroll est IMPOSSIBLE */
+    overflow-y: auto;        /* Autorise le défilement vertical */
+    flex-grow: 1; 
+    padding: 1rem; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
 
     .message { padding: 0.9rem 1.2rem; border-radius: 15px; font-size: 0.9rem; max-width: 85%; line-height: 1.4; }
 
