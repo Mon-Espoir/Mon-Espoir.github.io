@@ -135,7 +135,6 @@
             <section class="doc-analysis">
                 <h3>🔬 Analyseur de Documents</h3>
                 
-                <!-- 1. AJOUT DU BOUTON CACHÉ ICI -->
                 <input type="file" id="fileInput" style="display: none;" accept=".pdf,.docx,.jpg">
 
                 <div class="upload-zone" id="upload-box">
@@ -212,7 +211,10 @@
                     errorMsg.textContent = "Erreur : Serveur non lancé. Utilise 'node index.js' dans ton terminal.";
                     chatBox.appendChild(errorMsg);
                 }
-                chatBox.scrollTop = chatBox.scrollHeight;
+                // --- SEULE MODIFICATION : FORCE LE SCROLL APRÈS L'ARRIVÉE DE LA RÉPONSE ---
+                setTimeout(() => {
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 50);
             }
         }
 
